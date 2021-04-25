@@ -5,13 +5,12 @@ vector* init_vector()
     v->size = 0;
     v->capacity = 0;
     v->arr = NULL;
-    printf("ptr = %p\n", v);
     return v;
 }
 void pushback(vector* v, int ele)
 {
     if (v == NULL) {
-        printf("v is NULL in pushback\n");
+        printf("v is NULL in pushback. Initialise v using init_vector first!\n");
         assert(0);
     }
     if (v->arr == NULL) {
@@ -30,7 +29,6 @@ void pushback(vector* v, int ele)
             assert(0);
         }
         v->capacity = v->capacity * 2;
-        // printf("Capacity = %zu\n", v->capacity);
     }
     v->arr[v->size] = ele;
     ++(v->size);

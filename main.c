@@ -26,7 +26,8 @@ int main()
 
     // a[i][j] = -1 iff i is not connected to j 
     // If i is connected to j, a[i][j] = length of edge from i to j
-    /* Initialise all elements of a to -1 */
+
+    /* INITIALISE ALL ELEMENTS OF A TO -1 */
     for (LL i = 0; i < N; ++i) {
         for (LL j = 0; j < N; ++j) {
             if (i == j)
@@ -35,6 +36,7 @@ int main()
                 a[i][j] = -1;
         }
     }
+
 
     for (LL i = 0; i < M; ++i) {
         LL U, V; double W;
