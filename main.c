@@ -1,11 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <string.h>
-#include <math.h>
-#include <assert.h>
+// Keep track of the currentDay here
+#include "header.h"
 #include "person.h"
-typedef long long LL;
 int main()
 {
     /* INPUT */
@@ -64,9 +59,18 @@ int main()
         a[U][V] = W;
         a[V][U] = W;
     }
+    person* p = (person*)malloc(sizeof(person) * K);
+    int day = 0;
     for (LL i = 0; i < K; ++i) {
-
+        init_person(&p[i]);
+        int station_no;
+        scanf("%d", station_no);
+        add_travel(&p[i], day, station_no);
     }
+
+
+
+
 
     /* DELELTE a */
     for (LL i = 0; i < M; ++i) {

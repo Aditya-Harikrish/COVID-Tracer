@@ -1,5 +1,12 @@
 /* HOW TO USE
-vector *v = init_vector(); // initialise v, preferably at the time of delaration
+METHOD 1 (recommneded):
+vector v;
+init_vector(&v);
+pushback(v, int ele); // to push back ele into v
+popback(v) // to pop back from v
+
+METHOD 2:
+vector *v = init_vector_ptr(); // initialise v, preferably at the time of delaration
 pushback(v, int ele); // to push back ele into v
 popback(v) // to pop back from v
 delete_vector(&v) // to delete v
@@ -17,7 +24,8 @@ struct vector {
     int* arr;
 };
 
-vector* init_vector();
+void init_vector(vector* v);
+vector* init_vector_ptr();
 void pushback(vector* v, int ele);
 void print_vector(vector* v);
 void delete_vector(vector** v);

@@ -1,5 +1,11 @@
 #include "vector.h"
-vector* init_vector()
+void init_vector(vector* v)
+{
+    v->arr = NULL;
+    v->size = 0;
+    v->capacity = 0;
+}
+vector* init_vector_ptr()
 {
     vector* v = (vector*)malloc(sizeof(vector));
     v->size = 0;
@@ -10,7 +16,7 @@ vector* init_vector()
 void pushback(vector* v, int ele)
 {
     if (v == NULL) {
-        printf("v is NULL in pushback. Initialise v using init_vector first!\n");
+        printf("v is NULL in pushback. Initialise v using init_vector_ptr first!\n");
         assert(0);
     }
     if (v->arr == NULL) {
@@ -48,6 +54,10 @@ void delete_vector(vector** v)
 }
 void popback(vector* v)
 {
+    if (v->size == 0) {
+        printf("Underflow error! Cannot popback from an empty vector!\n");
+        assert(0);
+    }
     --(v->size);
     if (v->size == 0) {
         free(v->arr);
