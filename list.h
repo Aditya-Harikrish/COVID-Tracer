@@ -9,6 +9,7 @@
 // now the getPrimaryContacts function is called when we want a list of all the primary contacts if we give the input parameters as the array of positive people ( a loop in which when we enter
 // each person and take a list of all the stations he visited i.e getStationContacts is called here which takes the input as the stations array and number of that station which that person arrived
 // on that particular day and prints them if they are not same as the positive people.
+//
 
 void updatePeople(vector persons[],int day,LL station_Number);//whenever the person is moving from one station to other station, this is used to update the
                                                                                            //array of people->vector persons[] is used to update the travelling status of the person on a specefic day
