@@ -18,13 +18,16 @@ void updatePeople(vector persons[],int day,LL station_Number);//whenever the per
                                                                                            //array of people->vector persons[] is used to update the travelling status of the person on a specific day
                                                                                            //stationNumber takes the station number that is to be added to the person's vector array
 
-void getPrimaryContacts(int Day,vector persons[],vector stations[],LL positive[]);
+LL* getPrimaryContacts(int Day,vector persons[],vector stations[],LL positive[]);
 
 
 void updateStations(int Day,vector stations[],int priorityVal);
 
 
 void getStationContacts(int stationVal,vector stations[],int Day,LL positive[]);
+
+
+void getSecondaryContacts(int Day,vector persons[],vector stations[],LL positive[],LL primary[]);
 
 
 #endif
