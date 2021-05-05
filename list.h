@@ -14,20 +14,23 @@
 // can it just be done by adding other field to stations struct??
 
 
-void updatePeople(vector persons[],int day,LL station_Number);//whenever the person is moving from one station to other station, this is used to update the
-                                                                                           //array of people->vector persons[] is used to update the travelling status of the person on a specific day
-                                                                                           //stationNumber takes the station number that is to be added to the person's vector array
+void updatePeople(person* persons[],int day,LL station_Number,int personNumber);//whenever the person is moving from one station to other station, this is used to update the
+                                                                                //array of people->vector persons[] is used to update the travelling status of the person on a specific day
+                                                              //stationNumber takes the station number that is to be added to the person's vector array
 
-LL* getPrimaryContacts(int Day,vector persons[],vector stations[],LL positive[]);
-
-
-void updateStations(int Day,vector stations[],int priorityVal);
+LL* getPrimaryContacts(int Day,person* persons[],station* stations[],LL positive[]);
 
 
-void getStationContacts(int stationVal,vector stations[],int Day,LL positive[]);
+void updateStations(int Day,station* stations[],int priorityVal);
 
 
-void getSecondaryContacts(int Day,vector persons[],vector stations[],LL positive[],LL primary[]);
+void getStationContacts(int stationVal,station* stations[],int Day,LL positive[]);
+
+
+void getSecondaryContacts(int Day,person* persons[],station* stations[],LL positive[],LL primary[]);
 
 
 #endif
+
+
+
