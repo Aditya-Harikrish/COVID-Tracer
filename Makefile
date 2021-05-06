@@ -1,0 +1,1 @@
+gcc -g main.c vector.c person.c station.c

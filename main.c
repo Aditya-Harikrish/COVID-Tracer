@@ -1,6 +1,8 @@
 // Keep track of the currentDay here
 #include "header.h"
 #include "person.h"
+#include "station.h"
+#include "common.h"
 int main()
 {
     /* INPUT */
@@ -14,7 +16,7 @@ int main()
     for (LL i = 0; i < N; ++i) {
         a[i] = (double*)malloc(sizeof(double) * N);
         if (a[i] == NULL) {
-            printf("Failed to allocate memort to a[%d]\n", i);
+            printf("Failed to allocate memory to a[%d]\n", i);
             assert(0);
         }
     }
@@ -68,9 +70,38 @@ int main()
         add_travel(&p[i], day, station_no);
     }
 
+    /* QUERIES */
+    while(1) {
+        int choice;
+        printf("WELCOME!\n\n");
+        printf("Enter 1 to enter a list of COVID positive people.\n");
+        printf("Enter 2 to find the top 3 shortest and safest paths.\n");
+        printf("Enter 3 to inquire about a person.\n");
+        printf("Enter 4 to move forward by one day\n");
+        printf("Enter 9 to quit.\n");
+        printf("Your choice: ");
+        scanf("%d", &choice);
 
+        if(choice == 1) {
 
+        }
+        else if(choice == 2) {
 
+        }
+        else if (choice == 3) {
+
+        }
+        else if(choice == 4) {
+            // move_forward_one_day(p, )
+        }
+        else if(choice == 9) {
+            printf("Goodbye!\n");
+            break;
+        }
+        else {
+            printf("Invalid output. Please try again.");
+        }
+    }
 
     /* DELELTE a */
     for (LL i = 0; i < M; ++i) {

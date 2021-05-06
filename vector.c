@@ -46,7 +46,13 @@ void print_vector(vector* v)
     }
     printf("\n");
 }
-void delete_vector(vector** v)
+void delete_vector(vector *v)
+{
+    free(v->arr);
+    v->capacity = 0;
+    v->size = 0;
+}
+void delete_vector_ptr(vector** v)
 {
     free((*v)->arr);
     free(*v);
