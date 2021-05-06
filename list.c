@@ -25,13 +25,13 @@ void getPrimaryContacts(int Day,person* persons[],station* stations[],LL positiv
 
 void updateStations(int Day,station* stations[],int stationVisit,int stationLeft,int personNumber)
 {
-    stations[stationVisit]->array_people[personNumber]=1;//this is a int array which is 1 if the person is present and 0 if that person is not there in that station
-    stations[stationLeft]->array_people[personNumber]=0;
+    stations[stationVisit]->array_people[personNumber]=1;//this is a int array which is 1 if the person is present at some point of time
     stations[stationVisit]->transitNum++;//this is useful for keeping a track of time for which the person visited the station and the person left the station.
     pushback(stations[stationVisit]->array_time_personVisit[personNumber],stations[stationVisit]->transitNum);//=stations[stationVisit]->transitNum;//the above line is implemented here
     stations[stationLeft]->transitNum++;//at the end of each day transit num of each station should become 0
     pushback(stations[stationLeft]->array_time_personLeft[personNumber],stations[stationLeft]->transitNum);
 }
+
 
 void getStationContacts_primary(int stationVal,station* stations[],int Day,person* persons[],int totalPeople,LL positivePerson)//this day is the present day running
 {
@@ -42,13 +42,30 @@ void getStationContacts_primary(int stationVal,station* stations[],int Day,perso
         {
             if(stations[stationVal]->array_People[k]==1)//checking if that person is there in that station.
             {
-                if(persons[k]->status!=POSITIVE)
+                if((persons[k]->status!=POSITIVE)&&(persons[k]->status!=QUARANTINED))
                 {
-//                    if(stations[stationVal]->array_time_personVisit[k]<stations[stationVal]->array_time_personLeft[positivePerson])
-//                    {
-//                        printf("%d ",k);
-//                        persons[k]->status=PRIMARY_CONTACT;
-//                    }
+                    if(l<(stations[stationVal]->array_time_personLeft[positivePerson]).size==0||stations[stationVal]->array_time_personLeft[k]).size==0)//This is for the person came at some point but never left
+                    {
+                        persons[k]->status=PRIMARY_CONTACT;
+                        printf("%d ",k);
+                        goto L1;
+                    }
+                    for(int l=0;l<(stations[stationVal]->array_time_personLeft[positivePerson]).size;l++)//this is for all the movement of person that can take place
+                    {
+                        for(int m=0;m<(stations[stationVal]->array_time_personVisit[k]).size;m++)
+                        {
+                            if(stations[stationVal]->array_time_personVisit[k].arr[m]<stations[stationVal]->array_time_personLeft[positivePerson].arr[l])
+                            {
+                                if(stations[stationVal]->array_time_personVisit[k].arr[m]>stations[stationVal]->array_time_personVisit[positivePerson].arr[l])
+                                {
+                                    persons[k]->status=PRIMARY_CONTACT;
+                                    printf("%d ",k);
+                                    goto L1;
+                                }
+                            }
+                        }
+                    }
+                    L1:
                 }
             }
             printf("/n");

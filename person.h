@@ -7,6 +7,7 @@
 #define POSITIVE 1
 #define PRIMARY_CONTACT 2
 #define SECONDARY_CONTACT 3
+#define QUARANTINED 4
 
 typedef struct person person;
 struct person {
