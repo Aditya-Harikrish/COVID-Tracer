@@ -1,16 +1,16 @@
 /* HOW TO USE
-METHOD 1 (recommneded):
+METHOD 1 (recommended):
 vector v;
 init_vector(&v);
 pushback(v, int ele); // to push back ele into v
 popback(v) // to pop back from v
-free(v->arr); // to clear the contents of the vector
+delete_vector(&v); // to clear the contents of the vector
 
 METHOD 2:
 vector *v = init_vector_ptr(); // initialise v, preferably at the time of delaration
 pushback(v, int ele); // to push back ele into v
 popback(v) // to pop back from v
-delete_vector(&v) // to delete v
+delete_vector_ptr(&v) // to delete v
 */
 #include "header.h"
 
@@ -27,7 +27,8 @@ void init_vector(vector* v);
 vector* init_vector_ptr();
 void pushback(vector* v, int ele);
 void print_vector(vector* v);
-void delete_vector(vector** v);
+void delete_vector(vector *v);
+void delete_vector_ptr(vector** v);
 void popback(vector* v);
 
 #endif
