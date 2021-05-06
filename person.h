@@ -1,4 +1,5 @@
 #include "vector.h"
+#include "station.h"
 #ifndef PERSON_H
 #define PERSON_H
 
