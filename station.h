@@ -10,7 +10,7 @@ struct station {
     //vector persons_visited[15];
     int* array_people;
     vector* array_time_personVisit;
-    vector* array_time_personVisit;
+    vector* array_time_personLeft;
 };
 
 
