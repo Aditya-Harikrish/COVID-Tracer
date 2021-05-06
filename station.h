@@ -12,6 +12,7 @@ struct station {
     vector* array_time_personVisit;
     vector* array_time_personLeft;
 };
+void init_station(station* station_object, int id, int N);
 
 
 #endif
