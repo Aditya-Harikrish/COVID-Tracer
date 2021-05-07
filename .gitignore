@@ -1,0 +1,5 @@
+testmain.c
+CMakeLists.txt
+cmake-build-debug
+*.out
+*.exe
