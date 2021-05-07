@@ -11,80 +11,174 @@ void status(person p)
         printf("Secondary Contact\n");
 }
 
-void list_positive(person* p,int k)
+int list_positive(person *p, int k, char func)
 {
-    for(int i=0;i<k;k++)
-    {
-        if(p[i].status==1)
-            printf("%d ",p[i].id);
-    }
-    printf("\n");
-}
+    vector v;
+    init_vector(&v);
+    int s = 0;
 
-void list_primary(person* p,int k)
-{
-    for(int i=0;i<k;k++)
+    for (int i = 0; i < k; k++)
     {
-        if(p[i].status==2)
-            printf("%d ",p[i].id);
-    }
-    printf("\n");
-}
-
-void list_secondary(person* p,int k)
-{
-    for(int i=0;i<k;k++)
-    {
-        if(p[i].status==3)
-            printf("%d ",p[i].id);
-    }
-    printf("\n");
-}
-
-void list_primary_at_s(station s,person* p,int n)
-{
-    
-    for(int i=0;i<n;i++)
-    {
-        if(s.array_people[i]==1 && p[i].status==2)
+        if (p[i].status == 1)
         {
-            printf("%d",p[i].id);        
+            pushback(&v, p[i].id);
+            s++;
         }
     }
-    printf("\n");
-}
-
-
-void list_secondary_at_s(station s,person* p,int n)
-{
-    
-    for(int i=0;i<n;i++)
+    if (func == 'P')
     {
-        if(s.array_people[i]==1 && p[i].status==3)
+        for (int i = 0; i < v.size; i++)
         {
-            printf("%d",p[i].id);        
+            prinf("%d", v.arr[i]);
         }
-    
+        printf("\n");
     }
-    printf("\n");
+
+    if (func == 'R')
+        return s;
 }
 
-void list_postive_at_s(station s,person* p,int n)
+int list_primary(person *p, int k,char func)
 {
-    
-    for(int i=0;i<n;i++)
+    vector v;
+    init_vector(&v);
+    int s = 0;
+
+    for (int i = 0; i < k; k++)
     {
-        if(s.array_people[i]==1 && p[i].status==1)
+        if (p[i].status == 2)
         {
-            printf("%d",p[i].id);        
+            pushback(&v, p[i].id);
+            s++;
         }
     }
-    printf("\n");
+    if (func == 'P')
+    {
+        for (int i = 0; i < v.size; i++)
+        {
+            prinf("%d", v.arr[i]);
+        }
+        printf("\n");
+    }
+
+    if (func == 'R')
+        return s;
 }
 
-void location(person p,int curr_day)
+int list_secondary(person *p, int k,char func)
 {
-    curr_day=curr_day%15;
-    vector v=p.stations_visited[curr_day];
-    printf("%d\n",v.arr[v.size]);
+    vector v;
+    init_vector(&v);
+    int s = 0;
+
+    for (int i = 0; i < k; k++)
+    {
+        if (p[i].status == 3)
+        {
+            pushback(&v, p[i].id);
+            s++;
+        }
+    }
+    if (func == 'P')
+    {
+        for (int i = 0; i < v.size; i++)
+        {
+            prinf("%d", v.arr[i]);
+        }
+        printf("\n");
+    }
+
+    if (func == 'R')
+        return s;
+}
+
+int list_primary_at_s(station s, person *p, int k,char func)
+{
+
+    vector v;
+    init_vector(&v);
+    int sum = 0;
+
+    for (int i = 0; i < k; k++)
+    {
+        if (s.array_people[i]==1 && p[i].status == 2)
+        {
+            pushback(&v, p[i].id);
+            sum++;
+        }
+    }
+    if (func == 'P')
+    {
+        for (int i = 0; i < v.size; i++)
+        {
+            prinf("%d", v.arr[i]);
+        }
+        printf("\n");
+    }
+
+    if (func == 'R')
+        return sum;
+}
+
+int list_secondary_at_s(station s, person *p, int k,char func)
+{
+
+     vector v;
+    init_vector(&v);
+    int sum = 0;
+
+    for (int i = 0; i < k; k++)
+    {
+        if (s.array_people[i]==1 && p[i].status == 3)
+        {
+            pushback(&v, p[i].id);
+            sum++;
+        }
+    }
+    if (func == 'P')
+    {
+        for (int i = 0; i < v.size; i++)
+        {
+            prinf("%d", v.arr[i]);
+        }
+        printf("\n");
+    }
+
+    if (func == 'R')
+        return sum;
+}
+
+int list_postive_at_s(station s, person *p, int k,char func)
+{
+
+     vector v;
+    init_vector(&v);
+    int sum = 0;
+
+    for (int i = 0; i < k; k++)
+    {
+        if (s.array_people[i]==1 && p[i].status == 1)
+        {
+            pushback(&v, p[i].id);
+            sum++;
+        }
+    }
+    if (func == 'P')
+    {
+        for (int i = 0; i < v.size; i++)
+        {
+            prinf("%d", v.arr[i]);
+        }
+        printf("\n");
+    }
+
+    if (func == 'R')
+        return sum;
+}
+
+void location(person p, int curr_day)
+{
+    curr_day = curr_day % 15;
+    vector v = p.stations_visited[curr_day];
+    printf("%d\n", v.arr[v.size - 1]);
 }

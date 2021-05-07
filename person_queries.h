@@ -3,32 +3,40 @@
 #include "header.h"
 #include "station.h"
 
+
+
+//In all give function 'char func' tells how the user wants to use the function 
+//func=='P' then the function prints the list
+//func=='R' returns the no. of person in that list.   
+
+
+
 //Takes the person node and prints the status
 void status(person p);
 //O(1)
 
 //Takes an array of all person and total number of person and print the list of all positive ones
-void list_positive(person* p,int k);
+int list_positive(person* p,int k, char func);//
 //O(n)
 
 //Takes an array of all person and total number of person and print the list of all primary contacts
-void list_primary(person* p,int k);
+int list_primary(person* p,int k,char func);
 //O(n)
 
 //Takes an array of all person and total number of person and print the list of all secondary contacts
-void list_positive(person* p,int k);
+int list_positive(person* p,int k,char func);
 //O(n)
 
 //Takes station node,array of all person node and total number of person  and print the list of all primary contacts at that station
-void list_primary_at_s(station s,person* p,int n); 
+int list_primary_at_s(station s,person* p,int n,char func); 
 //O(n)
 
 //Takes station node, array of all person node and total number of person and print the list of all secondary contacts at that station
-void list_secondary_at_s(station s,person* p,int n);
+int list_secondary_at_s(station s,person* p,int n,char func);
 //O(n)
 
 //Takes station node, array of all person node and total number of person and print the list of all positive at that station
-void list_positive_at_s(station s,person* p,int n);
+int list_positive_at_s(station s,person* p,int n,char func);
 //O(n) 
 
 //takes in person node and current date and print its location
