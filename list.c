@@ -16,7 +16,7 @@ void getPrimaryContacts(int Day,person* persons[],station* stations[],LL positiv
             for(int k = 0; k < persons[positiveVal]->stations_visited[j].size; k++) //this gives the stations which the person visited
             {
                int stationNum = persons[positive[k]]->stations_visited[j].arr[k]; //this gives the station numbers( type int )
-               getStationContacts_primary(stationNum,stations,Day,persons,totalPeople,positive[k]);
+               getStationContacts_primary(stationNum,stations,Day,persons,totalPeople,positive[k]);//the person surely visited that station
             }
         }
     }
@@ -26,49 +26,62 @@ void getPrimaryContacts(int Day,person* persons[],station* stations[],LL positiv
 void updateStations(int Day,station* stations[],int stationVisit,int stationLeft,int personNumber)
 {
     stations[stationVisit]->array_people[personNumber]=1;//this is a int array which is 1 if the person is present at some point of time
+    stations[stationLeft]->array_people[personNumber]=0;
     stations[stationVisit]->transitNum++;//this is useful for keeping a track of time for which the person visited the station and the person left the station.
-    pushback(stations[stationVisit]->array_time_personVisit[personNumber],stations[stationVisit]->transitNum);//=stations[stationVisit]->transitNum;//the above line is implemented here
+    pushback(stations[stationVisit]->array_time_personVisit[Day][personNumber],stations[stationVisit]->transitNum);//=stations[stationVisit]->transitNum;//the above line is implemented here
     stations[stationLeft]->transitNum++;//at the end of each day transit num of each station should become 0
-    pushback(stations[stationLeft]->array_time_personLeft[personNumber],stations[stationLeft]->transitNum);
+    pushback(stations[stationLeft]->array_time_personLeft[Day][personNumber],stations[stationLeft]->transitNum);
 }
 
 
 void getStationContacts_primary(int stationVal,station* stations[],int Day,person* persons[],int totalPeople,LL positivePerson)//this day is the present day running
 {
-    for(int i=Day,j=0;j<15;i--,j++)
+    for(int i=Day,j=0;j<15||i==0;i--,j++)
     {
         printf("Primary contacts on Day %d:\n",i);
-        for(int k=0;k<totalPeople;k++)
+
+        if((stations[stationVal]->array_time_personLeft[Day%15][positivePerson]).size==0&&stations[stationVal]->array_time_personVisit[Day%15][positivePerson]).size==0)//the positive person has not moved at all from that station on that day
         {
-            if(stations[stationVal]->array_People[k]==1)//checking if that person is there in that station.
+            if(stations[stationVal]->array_people[positivePerson]==1)
             {
-                if((persons[k]->status!=POSITIVE)&&(persons[k]->status!=QUARANTINED))
+                for(int k=0;k<totalPeople;k++)
                 {
-                    if(l<(stations[stationVal]->array_time_personLeft[positivePerson]).size==0||stations[stationVal]->array_time_personLeft[k]).size==0)//This is for the person came at some point but never left
+                    if(stations[stationVal]->array_time_personVisit[Day%15][k]).size==0)
                     {
-                        persons[k]->status=PRIMARY_CONTACT;
-                        printf("%d ",k);
-                        goto L1;
-                    }
-                    for(int l=0;l<(stations[stationVal]->array_time_personLeft[positivePerson]).size;l++)//this is for all the movement of person that can take place
-                    {
-                        for(int m=0;m<(stations[stationVal]->array_time_personVisit[k]).size;m++)
+                        if(persons[k]->status!=PRIMARY_CONTACT||persons[k]->status!=POSITIVE)
                         {
-                            if(stations[stationVal]->array_time_personVisit[k].arr[m]<stations[stationVal]->array_time_personLeft[positivePerson].arr[l])
-                            {
-                                if(stations[stationVal]->array_time_personVisit[k].arr[m]>stations[stationVal]->array_time_personVisit[positivePerson].arr[l])
-                                {
-                                    persons[k]->status=PRIMARY_CONTACT;
-                                    printf("%d ",k);
-                                    goto L1;
-                                }
-                            }
+                            printf("%d ",k);
+                            persons[k]->status=PRIMARY_CONTACT;
                         }
                     }
-                    L1:
                 }
             }
-            printf("/n");
+        }
+        else if((stations[stationVal]->array_time_personLeft[Day%15][positivePerson]).size>stations[stationVal]->array_time_personVisit[Day%15][positivePerson]).size)
+        {
+
+            for(int k=0;k<totalPeople;k++)
+            {
+                if(stations[stationVal]->array_time_personLeft[Day%15][positivePerson]->arr[0]>stations[stationVal]->array_time_personVisit[Day%15][k]->arr[k])
+                {
+
+                }
+            }
+        }
+        else if((stations[stationVal]->array_time_personLeft[Day%15][positivePerson]).size<stations[stationVal]->array_time_personVisit[Day%15][positivePerson]).size)
+        {
+
+        }
+        else if((stations[stationVal]->array_time_personLeft[Day%15][positivePerson]).size<stations[stationVal]->array_time_personVisit[Day%15][positivePerson]).size)
+        {
+            if(stations[stationVal]->array_people[positivePerson]==1)
+            {
+
+            }
+            if(stations[stationVal]->array_people[positivePerson]==0)
+            {
+
+            }
         }
 
         printf("\n");
