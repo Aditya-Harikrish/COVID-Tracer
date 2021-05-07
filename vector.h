@@ -4,6 +4,12 @@ vector v;
 init_vector(&v);
 pushback(v, int ele); // to push back ele into v
 popback(v) // to pop back from v
+
+v.size is the the number of elements currently is the vector
+v.capacity is the capacity of the vector
+DO NOT MODIFY v.size AND v.capacity UNLESS YOU KNOW WHAT YOU'RE DOING.
+The functions mentioned above handle that. 
+
 delete_vector(&v); // to clear the contents of the vector
 
 METHOD 2:
