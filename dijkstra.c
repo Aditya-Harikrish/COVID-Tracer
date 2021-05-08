@@ -2,91 +2,52 @@
 #include <stdbool.h>
 #include <limits.h>
 #include "vector.h"
-
-//Check this out
-// https://github.com/AnimeshSinha1309/algorithms-notebook/blob/master/others/berkeley.pdf
-
-
-//TODO
-
-/*
-if not same, compare danger values
-if same danger value then compare using length of path
-try to improve on time complexity
-*/
-
-//DONE
-
-/*
-implement basic Dijkstra
-way to keep track of path
-find algo for next shortest
-manipulating the adj matrix according to our need
-compare that any 2 shortest paths are not same
-*/
-
-
-typedef struct station st_info;
-
-struct station
-{
-    int danger_val;
-};
+#include "dijkstra.h"
 
 int num_stations;
 int src;
 int dest;
 
-int danger_1;
-int danger_2;
-int danger_3;
-
-int comp(vector* P1, vector* P3);
-void get_path(int parent[], vector* P, int tmp_src);
-int safest_station(int danger_path[], bool traversed[]);
-int give_shortest_path(vector* S, vector* T, int matrix[][num_stations]);
-int dijkstra_safety(int graph[num_stations][num_stations], st_info arr[], vector* P);
-int first_safest(int matrix[][num_stations], vector* P1, st_info arr[]);
-int second_safest(int matrix[][num_stations], vector* P1, vector* P2, st_info arr[]);
-int third_safest(int matrix[][num_stations], vector* P1, vector* P2, vector* P3, st_info arr[]);
-
-int main()
+void get_safest_shortest(int s, int d, int num_st, int adj_matrix[][num_st], station arr[])
 {
-    scanf("%d", &num_stations);
-    int adj_matrix[num_stations][num_stations];
+    num_stations = num_st;
+    src = s;
+    dest = d;
+    // scanf("%d", &num_stations);
+    // int adj_matrix[num_stations][num_stations];
 
-    for(int i = 0; i < num_stations; i++)
-    {
-        for(int j = 0; j < num_stations; j++)
-        {
-            scanf("%d", &adj_matrix[i][j]);
-        }
-    }
+    // for(int i = 0; i < num_stations; i++)
+    // {
+    //     for(int j = 0; j < num_stations; j++)
+    //     {
+    //         scanf("%d", &adj_matrix[i][j]);
+    //     }
+    // }
 
-    st_info arr[num_stations];
+    // station arr[num_stations];
 
-    for(int i = 0; i < num_stations; i++)
-    {
-        scanf("%d", &arr[i].danger_val);
-    }
+    // for(int i = 0; i < num_stations; i++)
+    // {
+    //     scanf("%lf", &arr[i].danger_val);
+    // }
 
-    scanf("%d %d", &src, &dest);
+    // scanf("%d %d", &src, &dest);
 
     // initialising the 3 paths as vectors
-    vector* path_1 = init_vector();
-    vector* path_2 = init_vector();
-    vector* path_3 = init_vector();
+    vector* path_1 = init_vector_ptr();
+    vector* path_2 = init_vector_ptr();
+    vector* path_3 = init_vector_ptr();
 
     // finding the safest path
-    int danger_1 = first_safest(adj_matrix, path_1, arr);
+    double danger_1 = first_safest(adj_matrix, path_1, arr);
     print_vector(path_1);
 
     // finding the second safest path
-    int danger_2 = second_safest(adj_matrix, path_1, path_2, arr);
+    double danger_2 = second_safest(adj_matrix, path_1, path_2, arr);
     print_vector(path_2);
 
-    // finding the thirs safest path
-    int danger_3 = third_safest(adj_matrix, path_1, path_2, path_3, arr);
+    // finding the third safest path
+    double danger_3 = third_safest(adj_matrix, path_1, path_2, path_3, arr);
     print_vector(path_3);
 
     // getting the shortest paths if 2 paths have the same danger value
@@ -111,21 +72,21 @@ int main()
     }
 
     // printing the paths along with the danger value
-    printf("Path-1 with danger_val = %d is ", danger_1);
+    printf("Path-1 with danger_val = %.2lf is ", danger_1);
     print_vector(path_1);
 
-    printf("Path-2 with danger_val = %d is ", danger_2);
+    printf("Path-2 with danger_val = %.2lf is ", danger_2);
     print_vector(path_2);
 
-    printf("Path-3 with danger_val = %d is ", danger_3);
+    printf("Path-3 with danger_val = %.2lf is ", danger_3);
     print_vector(path_3);
 
     // freeing the malloc'ed memory
-    delete_vector(&path_1);
-    delete_vector(&path_2);
-    delete_vector(&path_3);
+    delete_vector(path_1);
+    delete_vector(path_2);
+    delete_vector(path_3);
 
-    return 0;
+    return;
 }
 
 // gives the shortest path according to the total distance
@@ -156,12 +117,12 @@ int give_shortest_path(vector* S, vector* T, int matrix[][num_stations])
     if(total_dist_2 < total_dist_1)
     {
         // swapping the pointers to the paths if second path is shorter than the first
-        vector* tmp = init_vector();
+        vector* tmp = init_vector_ptr();
         *tmp = *S;
         *S = *T;
         *T = *tmp;
 
-        delete_vector(&tmp);
+        delete_vector(tmp);
 
         return 1;
     }
@@ -170,17 +131,17 @@ int give_shortest_path(vector* S, vector* T, int matrix[][num_stations])
 }
 
 // getting the safest path among all
-int first_safest(int matrix[][num_stations], vector* P1, st_info arr[])
+double first_safest(int matrix[][num_stations], vector* P1, station arr[])
 {
-    int danger_1 =  dijkstra_safety(matrix, arr, P1);
-    printf("%d(danger_val) ", danger_1);
+    double danger_1 =  dijkstra_safety(matrix, arr, P1);
+    printf("%lf(danger_val) ", danger_1);
     return danger_1;
 }
 
 // picks out the safest station not yet traversed
-int safest_station(int danger_path[], bool traversed[])
+int safest_station(double danger_path[], bool traversed[])
 {
-    int min = INT_MAX;
+    double min = INT_MAX;
     int station_with_min_danger;
 
     for(int i = 0; i < num_stations; i++)
@@ -196,9 +157,9 @@ int safest_station(int danger_path[], bool traversed[])
 }
 
 // dijkstra implementation using the danger value as the cost
-int dijkstra_safety(int graph[num_stations][num_stations], st_info arr[], vector* P)
+double dijkstra_safety(int graph[num_stations][num_stations], station arr[], vector* P)
 {
-    int danger_val_path[num_stations];
+    double danger_val_path[num_stations];
     bool traversed[num_stations];
     int parent[num_stations];
 
@@ -220,10 +181,10 @@ int dijkstra_safety(int graph[num_stations][num_stations], st_info arr[], vector
         {
             for(int j = 0; j < num_stations; j++)
             {
-                if(traversed[j] == false && graph[u][j] > 0 && danger_val_path[u] + arr[j].danger_val < danger_val_path[j])
+                if(traversed[j] == false && graph[u][j] > 0 && danger_val_path[u] + arr[j].dangerValue < danger_val_path[j])
                 {
                     parent[j] = u;
-                    danger_val_path[j] = danger_val_path[u] + arr[j].danger_val;
+                    danger_val_path[j] = danger_val_path[u] + arr[j].dangerValue;
                 }
             }
         }
@@ -248,34 +209,34 @@ void get_path(int parent[], vector* P, int tmp_src)
 }
 
 // We use Yen's Algorithm to find the next shortest paths
-int second_safest(int matrix[][num_stations], vector* P1, vector* P2, st_info arr[])
+double second_safest(int matrix[][num_stations], vector* P1, vector* P2, station arr[])
 {
     // creating an array of vectors of size being the number of edges in P1
     vector* all_paths[P1->size - 1];
 
     // keeps track of the danger value of each path
-    int total_danger_val[P1->size -1];
+    double total_danger_val[P1->size -1];
 
     for(int i = 0; i < P1->size - 1; i++)
     {
         int r = P1->arr[i];
         int s = P1->arr[i+1];
 
-        all_paths[i] = init_vector();
+        all_paths[i] = init_vector_ptr();
 
         // removing the edge from the matrix
         int tmp = matrix[r][s];
         matrix[r][s] = 0;
 
         // finding the shortest path in this modified graph
-        int danger_of_dest = dijkstra_safety(matrix, arr, all_paths[i]);
+        double danger_of_dest = dijkstra_safety(matrix, arr, all_paths[i]);
 
         matrix[r][s] = tmp;
 
         total_danger_val[i] = danger_of_dest; 
     }    
 
-    int min = INT_MAX;
+    double min = INT_MAX;
     int index = 0;
 
     // getting the path with the least danger value
@@ -288,7 +249,7 @@ int second_safest(int matrix[][num_stations], vector* P1, vector* P2, st_info ar
         }
     }
 
-    printf("%d(danger_val) ", min);
+    printf("%lf(danger_val) ", min);
 
     // Putting the safest path achieved in P2
     for(int i = 0; i < all_paths[index]->size; i++)
@@ -299,33 +260,33 @@ int second_safest(int matrix[][num_stations], vector* P1, vector* P2, st_info ar
     // freeing the memory allocated for each path
     for(int i = 0; i < P1->size - 1; i++)
     {
-        delete_vector(&all_paths[i]);
+        delete_vector(all_paths[i]);
     }
 
     return min;
 }
 
-int third_safest(int matrix[][num_stations], vector* P1, vector* P2, vector* P3, st_info arr[])
+double third_safest(int matrix[][num_stations], vector* P1, vector* P2, vector* P3, station arr[])
 {
     // creating an array of vectors of size being the number of edges in P2
     vector* all_paths[P2->size - 1];
 
     // keeps track of the danger value of each path
-    int total_danger_val[P2->size -1];
+    double total_danger_val[P2->size -1];
 
     for(int i = 0; i < P2->size - 1; i++)
     {
         int r = P2->arr[i];
         int s = P2->arr[i+1];
 
-        all_paths[i] = init_vector();
+        all_paths[i] = init_vector_ptr();
 
         // removing the edge from the matrix
         int tmp = matrix[r][s];
         matrix[r][s] = 0;
 
         // finding the shortest path in this modified graph
-        int danger_of_dest = dijkstra_safety(matrix, arr, all_paths[i]);
+        double danger_of_dest = dijkstra_safety(matrix, arr, all_paths[i]);
 
         // to remove the cases in which the 1st and 3rd paths are identical
         if(comp(P1, all_paths[i]) == 1)
@@ -338,7 +299,7 @@ int third_safest(int matrix[][num_stations], vector* P1, vector* P2, vector* P3,
         total_danger_val[i] = danger_of_dest;
     }    
 
-    int min = INT_MAX;
+    double min = INT_MAX;
     int index = 0;
 
     // getting the path with the least danger value
@@ -351,7 +312,7 @@ int third_safest(int matrix[][num_stations], vector* P1, vector* P2, vector* P3,
         }
     }
 
-    printf("%d(danger_val) ", min);
+    printf("%lf(danger_val) ", min);
 
     // Putting the safest path achieved in P3
     for(int i = 0; i < all_paths[index]->size; i++)
@@ -362,7 +323,7 @@ int third_safest(int matrix[][num_stations], vector* P1, vector* P2, vector* P3,
     // freeing the memory allocated for each path
     for(int i = 0; i < P2->size - 1; i++)
     {
-        delete_vector(&all_paths[i]);
+        delete_vector(all_paths[i]);
     }
 
     return min;
@@ -380,7 +341,6 @@ int comp(vector* P1, vector* P3)
         {
             if(P1->arr[i] != P3->arr[i])
             {
-    // freeing the memory allocated for each path
                 return 0;
             }
         }
