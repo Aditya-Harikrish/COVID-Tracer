@@ -115,6 +115,11 @@ int main()
             }
 
             int currLocation;
+            for(int i = 0; i < N; ++i) {
+                if(s[i].array_people[p[i].id] == 1) {
+                    currLocation = s[i].id;
+                }
+            }
             /* GET THE CURRENT LOCATION OF THE PERSON */
             get_safest_shortest(currLocation, dest, N, a, s);
         }

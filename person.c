@@ -11,6 +11,6 @@ void init_person(person* p)
 void add_travel(person* p, station *s, int day, int destination)
 {
     pushback(&(p->stations_visited[day % 15]), destination);
-    pushback(&(s->persons_visited[day % 15]), destination);
+    // pushback(&(s->persons_visited[day % 15]), destination);
 }
 // void move
