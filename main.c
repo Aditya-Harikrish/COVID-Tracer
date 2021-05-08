@@ -41,7 +41,7 @@ int main() {
     }
 
 
-    for (LL i = 0; i < M; ++i) {
+    for (int i = 0; i < M; ++i) {
         LL U, V;
         double W;
         scanf("%lld%lld%lf", &U, &V, &W);
@@ -104,16 +104,40 @@ int main() {
         if (choice == 1) {
             int positiveVal;
             vector primaryContacts_vector;
-            init_vector(&)
+            init_vector(&primaryContacts_vector);
+            vector primaryContacts_vector_print;
+            init_vector(&primaryContacts_vector_print);
+
             scanf("%d", &positiveVal);
             LL A[positiveVal];
             for (int i = 0; i < positiveVal; i++) {
                 scanf("%lld", &A[i]);
             }
+
             int X;
             scanf("%d", &X);
+
             primaryContacts_vector = getPrimaryContacts(day, &p, &s, A, positiveVal, K, X);
             getSecondaryContacts(day,&p,&s,primaryContacts_vector,X,K);
+
+            primaryContacts_vector_print = getPrimaryContacts(day, &p, &s, A, positiveVal, K, X);
+
+            printf("Do you want to take the output into a file for plotting the number of primary contacts on each day (0/1)  ??\n");
+            int val;
+            scanf("%d",&val);
+            if(val==1)
+            {
+                for (int i = day, j = 0; j < X || i == 0; i--, j++)
+                {
+                    printf("%d %d",day,v.arr[j]);
+                }
+            }
+
+            for(int i=0;i<positiveVal;i++)
+            {
+                p[A[i]].status=QUARANTINED;
+            }
+
         } else if (choice == 2) {
             printf("Enter person number: ");
             int id;
@@ -207,7 +231,7 @@ int main() {
                     }
 
                     // Use this if the dangerValue data member is being updated:
-                    printf("Danger value of station %d is %Lf.\n", id, s[id].dangerValue);
+                    printf("Danger value of station %d is %lf.\n", id, s[id].dangerValue);
 
                     // Else use this:
                     // printf("Danger value of station %d is %Lf.\n", id, danger_value(s[id], p, K));
@@ -216,7 +240,7 @@ int main() {
                     printf("Invalid choice!\n");
             }
         } else if (choice == 4) {
-            // move_forward_one_day(p, )
+            move_forward_one_day(p,s, &day,K,N);
         } else if (choice == 9) {
             printf("Goodbye!\n");
             break;
