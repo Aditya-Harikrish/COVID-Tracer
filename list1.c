@@ -10,7 +10,7 @@
 
 
 
-void getSecondaryContacts(int Day,person* persons[],station* stations[],vector v,int X)
+void getSecondaryContacts(int Day,person* persons[],station* stations[],vector v,int X,int totalPeople)
 {
     for (int i=0;i< v.size;i++) // To check all the Primary Contacts in the given list.
     {

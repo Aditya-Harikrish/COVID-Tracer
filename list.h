@@ -27,11 +27,6 @@ void updateStations(int Day,station* stations[],int stationVisit,int stationLeft
 vector getStationContacts_primary(int stationVal,station* stations[],int Day,person* persons[],int totalPeople,LL positivePerson);
 
 
-void getSecondaryContacts(int Day,person* persons[],station* stations[],LL positive[],LL primary[]);
-
-
-void getStationContacts_secondary(int stationVal,station* stations[],int Day,person* persons[]);
-
 #endif
 
 
