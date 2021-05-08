@@ -1,7 +1,7 @@
 
 
 
-#include "list.h"
+#include "list1.h"
 
 //Now we find the Secondary contacts from the list of primary contacts we received from the day a person became a primary contact to the present day.
 // if the person is not positive, primary and quarantined and was present at a particular station on a particular day then he is said to be a secondary 
