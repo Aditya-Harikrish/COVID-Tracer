@@ -4,6 +4,8 @@
 #include "station.h"
 #include "common.h"
 #include "dijkstra.h"
+#include "list.h"
+
 int main()
 {
     /* INPUT */
