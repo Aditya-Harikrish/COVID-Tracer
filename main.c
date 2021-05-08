@@ -5,6 +5,7 @@
 #include "common.h"
 #include "dijkstra.h"
 #include "list.h"
+#include "person_queries.h"
 
 int main()
 {
@@ -115,14 +116,10 @@ int main()
                 printf("Station ID has be >= 0 and < K!");
                 assert(0);
             }
-
-            int currLocation;
-            for(int i = 0; i < N; ++i) {
-                if(s[i].array_people[p[i].id] == 1) {
-                    currLocation = s[i].id;
-                }
-            }
+            
+            int currLocation = location(p[id], day);
             /* GET THE CURRENT LOCATION OF THE PERSON */
+            
             get_safest_shortest(currLocation, dest, N, a, s);
         }
         else if (choice == 3) {
@@ -139,7 +136,7 @@ int main()
             printf("Invalid output. Please try again.");
         }
     }
-
+    
     /* DELELTE a */
     for (LL i = 0; i < M; ++i) {
         free(a[i]);

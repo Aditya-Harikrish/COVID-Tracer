@@ -8,7 +8,7 @@ void init_person(person* p)
         init_vector(&(p->stations_visited[i]));
     }
 }
-void add_travel(person* p, station *s, int day, int destination)
+void add_travel(person* p, station* s, int day, int destination)
 {
     pushback(&(p->stations_visited[day % 15]), destination);
     // pushback(&(s->persons_visited[day % 15]), destination);
