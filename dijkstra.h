@@ -5,7 +5,7 @@
 extern int num_stations;
 
 // main function to call all the other functions
-vector* get_safest_shortest(int s, int d, int num_st, int adj_matrix[][num_st], station arr[]);
+vector* get_safest_shortest(int s, int d, int num_st, int** adj_matrix, station arr[]);
 
 // to compare two paths if they are identical
 int comp(vector* P1, vector* P3);

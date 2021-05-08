@@ -8,7 +8,7 @@ int num_stations;
 int src;
 int dest;
 
-vector* get_safest_shortest(int s, int d, int num_st, int adj_matrix[][num_st], station arr[])
+vector* get_safest_shortest(int s, int d, int num_st, int** adj_matrix, station arr[])
 {
     num_stations = num_st;
     src = s;

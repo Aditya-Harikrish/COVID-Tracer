@@ -12,15 +12,15 @@ int main()
     /* INPUT */
     LL N, M, K;
     scanf("%lld %lld %lld", &N, &M, &K);
-    double** a = (double**)malloc(sizeof(double*) * N);
+    int** a = (int**)malloc(sizeof(int*) * N);
     if (a == NULL) {
         printf("Failed to allocate memory to a\n");
         assert(0);
     }
     for (LL i = 0; i < N; ++i) {
-        a[i] = (double*)malloc(sizeof(double) * N);
+        a[i] = (int*)malloc(sizeof(double) * N);
         if (a[i] == NULL) {
-            printf("Failed to allocate memory to a[%d]\n", i);
+            printf("Failed to allocate memory to a[%lld]\n", i);
             assert(0);
         }
     }
@@ -41,7 +41,7 @@ int main()
 
     for (LL i = 0; i < M; ++i) {
         LL U, V; double W;
-        scanf("%lld%lld%lld", &U, &V, &W);
+        scanf("%lld%lld%lf", &U, &V, &W);
         if (U < 0 || U >= N) {
             printf("U is out of bounds\n");
             printf("Assert failed for i = %d\n", i);
@@ -81,9 +81,9 @@ int main()
     for (LL i = 0; i < K; ++i) {
         init_person(&p[i]);
         int station_no;
-        scanf("%d", station_no);
-        /* INPUT LEFT */
-        // add_travel(&p[i], day, station_no);
+        scanf("%d", &station_no);
+        add_travel(&p[i], day, station_no,&s[station_no],i);
+
     }
 
     /* QUERIES */
@@ -119,8 +119,10 @@ int main()
             
             int currLocation = location(p[id], day);
             /* GET THE CURRENT LOCATION OF THE PERSON */
-            
-            get_safest_shortest(currLocation, dest, N, a, s);
+            //1-3-5
+            vector* path;
+            path=get_safest_shortest(currLocation, dest, N, a, s);
+
         }
         else if (choice == 3) {
 
