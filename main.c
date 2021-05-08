@@ -101,7 +101,18 @@ int main()
         scanf("%d", &choice);
 
         if (choice == 1) {
-
+            int positiveVal;
+            vector primaryContacts_vector;
+            init_vector(&)
+            scanf("%d",&positiveVal);
+            LL A[positiveVal];
+            for(int i=0;i<positiveVal;i++)
+            {
+                scanf("%lld",&A[i]);
+            }
+            int X;
+            scanf("%d",&X);
+            primaryContacts_vector=getPrimaryContacts(day,&p,&s,A,positiveVal,K,X);
         }
         else if (choice == 2) {
             printf("Enter person number: ");
@@ -120,10 +131,13 @@ int main()
             }
 
             int currLocation = location(p[id], day, 'R');
-            /* GET THE CURRENT LOCATION OF THE PERSON */
-            //1-3-5
             vector* path;
             path=get_safest_shortest(currLocation, dest, N, a, s);
+            for(int i=0;i<(path->size)-1;i++)
+            {
+                updatePeople(&p,day,arr[i+1],id);
+                updateStations(day,&s,path->arr[i+1],path->arr[i],id);
+            }
 
         }
         else if (choice == 3) {
