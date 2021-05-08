@@ -13,25 +13,6 @@ void get_safest_shortest(int s, int d, int num_st, int adj_matrix[][num_st], sta
     num_stations = num_st;
     src = s;
     dest = d;
-    // scanf("%d", &num_stations);
-    // int adj_matrix[num_stations][num_stations];
-
-    // for(int i = 0; i < num_stations; i++)
-    // {
-    //     for(int j = 0; j < num_stations; j++)
-    //     {
-    //         scanf("%d", &adj_matrix[i][j]);
-    //     }
-    // }
-
-    // station arr[num_stations];
-
-    // for(int i = 0; i < num_stations; i++)
-    // {
-    //     scanf("%lf", &arr[i].danger_val);
-    // }
-
-    // scanf("%d %d", &src, &dest);
 
     // initialising the 3 paths as vectors
     vector* path_1 = init_vector_ptr();
