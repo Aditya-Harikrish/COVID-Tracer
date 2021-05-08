@@ -11,7 +11,7 @@ int main()
 {
     /* INPUT */
     LL N, M, K;
-    scanf("%lld%lld%lld", &N, &M, &K);
+    scanf("%lld %lld %lld", &N, &M, &K);
     double** a = (double**)malloc(sizeof(double*) * N);
     if (a == NULL) {
         printf("Failed to allocate memory to a\n");

@@ -5,7 +5,7 @@
 
 
 
-//In all give function 'char func' tells how the user wants to use the function 
+//In all give functions 'char func' tells how the user wants to use the function 
 //func=='P' then the function prints the list
 //func=='R' returns the no. of person in that list.   
 
@@ -40,7 +40,7 @@ int list_positive_at_s(station s, person* p, int n, char func);
 //O(n) 
 
 //takes in person node and current date and print its location
-int location(person p, int curr_day);
+int location(person p,int curr_day,char func);
 //O(1)
 
 // gives danger value of a station s and the array of person and the total numberr of person

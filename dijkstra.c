@@ -8,7 +8,7 @@ int num_stations;
 int src;
 int dest;
 
-void get_safest_shortest(int s, int d, int num_st, int adj_matrix[][num_st], station arr[])
+vector* get_safest_shortest(int s, int d, int num_st, int adj_matrix[][num_st], station arr[])
 {
     num_stations = num_st;
     src = s;
@@ -62,12 +62,47 @@ void get_safest_shortest(int s, int d, int num_st, int adj_matrix[][num_st], sta
     printf("Path-3 with danger_val = %.2lf is ", danger_3);
     print_vector(path_3);
 
-    // freeing the malloc'ed memory
-    delete_vector_ptr(&path_1);
-    delete_vector_ptr(&path_2);
-    delete_vector_ptr(&path_3);
+    char ch;
+    int path_num;
+    printf("Do you want to traverse? (0/1): ");
+    scanf(" %c", &ch);
 
-    return;
+    if(ch == 'Y')
+    {
+        printf("Which path do you want to go with (1/2/3): ");
+        scanf(" %d", &path_num);
+
+        if(path_num == 1)
+        {
+            //free the malloc'ed memory and return ptr to required path
+            delete_vector_ptr(&path_2);
+            delete_vector_ptr(&path_3);
+            return path_1;
+        }
+        else if(path_num == 2)
+        {
+            //free the malloc'ed memory and return ptr to required path
+            delete_vector_ptr(&path_1);
+            delete_vector_ptr(&path_3);
+            return path_2;
+        }
+        else
+        {
+            //free the malloc'ed memory and return ptr to required path
+            delete_vector_ptr(&path_1);
+            delete_vector_ptr(&path_2);
+            return path_3;
+        }
+    }
+    else
+    {
+        // freeing the malloc'ed memory
+        delete_vector_ptr(&path_1);
+        delete_vector_ptr(&path_2);
+        delete_vector_ptr(&path_3);
+        return NULL;
+    }    
+
 }
 
 // gives the shortest path according to the total distance
