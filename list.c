@@ -46,25 +46,62 @@ void getStationContacts_primary(int stationVal,station* stations[],int Day,perso
             {
                 for(int k=0;k<totalPeople;k++)
                 {
-                    if(stations[stationVal]->array_time_personVisit[Day%15][k]).size==0)
+                    if(stations[stationVal]->array_time_personVisit[Day%15][k]).size==0&&stations[stationVal]->array_people[k]==1)//both positive person and the person in contact did not move
                     {
                         if(persons[k]->status!=PRIMARY_CONTACT||persons[k]->status!=POSITIVE||persons[k]->status!=QUARANTINED)
                         {
                             printf("%d ",k);
                             persons[k]->status=PRIMARY_CONTACT;
+                            persons[k]->statusChangeDay=Day;
+                        }
+                    }
+                    else if(stations[stationVal]->array_time_personVisit[Day%15][k]).size!=0)//the positive person is not moving but the other person enters the station
+                    {
+                        if(persons[k]->status!=PRIMARY_CONTACT||persons[k]->status!=POSITIVE||persons[k]->status!=QUARANTINED)
+                        {
+                            printf("%d ",k);
+                            persons[k]->status=PRIMARY_CONTACT;
+                            persons[k]->statusChangeDay=Day;
                         }
                     }
                 }
             }
         }
 
-        else if((stations[stationVal]->array_time_personLeft[Day%15][positivePerson]).size>stations[stationVal]->array_time_personVisit[Day%15][positivePerson]).size)
+        else if((stations[stationVal]->array_time_personLeft[Day%15][positivePerson]).size>stations[stationVal]->array_time_personVisit[Day%15][positivePerson]).size)//the positive person left the station more number of times than visited it
         {
             for(int k=0;k<totalPeople;k++)
             {
-                if((stations[stationVal]->array_time_personVisit[Day%15][positivePerson]).size==0)
+                if((stations[stationVal]->array_time_personLeft[Day%15][k]).size==0&&stations[stationVal]->array_time_personVisit[Day%15][k]).size==0)
+                {
+                    if(stations[stationVal]->array_people[k]==1)//the person is always there in that station
+                    {
+                        if(persons[k]->status!=PRIMARY_CONTACT||persons[k]->status!=POSITIVE||persons[k]->status!=QUARANTINED)
+                        {
+                            printf("%d ",k);
+                            persons[k]->status=PRIMARY_CONTACT;
+                            persons[k]->statusChangeDay=Day;
+                        }
+                    }
+                }
+                else if((stations[stationVal]->array_time_personLeft[Day%15][k]).size>stations[stationVal]->array_time_personVisit[Day%15][k]).size)//the person left for more times than he visited
                 {
 
+                }
+                else if((stations[stationVal]->array_time_personLeft[Day%15][k]).size<stations[stationVal]->array_time_personVisit[Day%15][k]).size)//the person visited for more times than he left
+                {
+
+                }
+                else if((stations[stationVal]->array_time_personLeft[Day%15][k]).size==stations[stationVal]->array_time_personVisit[Day%15][k]).size)//the person visited for equal no of times than he left
+                {
+                    if(stations[stationVal]->array_people[k]==1)//The person first leaves then enters
+                    {
+
+                    }
+                    else if(stations[stationVal]->array_people[k]==0)//The person first enters then leaves
+                    {
+
+                    }
                 }
             }
         }
@@ -73,13 +110,13 @@ void getStationContacts_primary(int stationVal,station* stations[],int Day,perso
         {
 
         }
-        else if((stations[stationVal]->array_time_personLeft[Day%15][positivePerson]).size<stations[stationVal]->array_time_personVisit[Day%15][positivePerson]).size)
+        else if((stations[stationVal]->array_time_personLeft[Day%15][positivePerson]).size==stations[stationVal]->array_time_personVisit[Day%15][positivePerson]).size)
         {
             if(stations[stationVal]->array_people[positivePerson]==1)
             {
 
             }
-            if(stations[stationVal]->array_people[positivePerson]==0)
+            else if(stations[stationVal]->array_people[positivePerson]==0)
             {
 
             }
