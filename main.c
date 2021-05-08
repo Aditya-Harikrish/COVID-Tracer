@@ -3,6 +3,8 @@
 #include "person.h"
 #include "station.h"
 #include "common.h"
+#include "list.h"
+
 int main()
 {
     /* INPUT */
@@ -66,8 +68,10 @@ int main()
     for (LL i = 0; i < K; ++i) {
         init_person(&p[i]);
         int station_no;
-        scanf("%d", station_no);
-        add_travel(&p[i], day, station_no);
+        scanf("%d", &station_no);
+        //add_travel(&p[i], day, station_no);
+
+
     }
 
     /* QUERIES */

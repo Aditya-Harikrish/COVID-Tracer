@@ -40,6 +40,9 @@ int list_positive_at_s(station s,person* p,int n,char func);
 //O(n) 
 
 //takes in person node and current date and print its location
-void location(person p,int curr_day);
+int location(person p,int curr_day,char func);
 //O(1)
 
+// gives danger value of a station s and the array of person and the total numberr of person
+double danger_value(station s,person* p,int n);
+//O(n)

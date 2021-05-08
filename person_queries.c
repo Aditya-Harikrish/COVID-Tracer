@@ -176,9 +176,21 @@ int list_postive_at_s(station s, person *p, int k,char func)
         return sum;
 }
 
-void location(person p, int curr_day)
+int location(person p, int curr_day,char func)
 {
     curr_day = curr_day % 15;
     vector v = p.stations_visited[curr_day];
-    printf("%d\n", v.arr[v.size - 1]);
+    if(func=='R')
+        return v.arr[v.size - 1];
+    if (func=='P')
+        printf("%d",v.arr[v.size - 1]);
+}
+
+double danger_value(station s,person* p,int n)
+{
+    int pos=list_positive_at_s(s,p,n,'R');
+    int prim=list_primary_at_s(s,p,n,'R');
+    int sec=list_secondary_at_s(s,p,n,'R');
+    double x=pos+prim/5+sec/10;
+    return x;
 }
