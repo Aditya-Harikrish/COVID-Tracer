@@ -43,3 +43,6 @@ int list_positive_at_s(station s,person* p,int n,char func);
 void location(person p,int curr_day);
 //O(1)
 
+// gives danger value of a station s and the array of person and the total numberr of person
+double danger_value(station s,person* p,int n);
+//O(n)
