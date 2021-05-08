@@ -9,8 +9,7 @@ void init_station(station* station_object, int id, int N)
     (*station_object).array_time_personVisit = (vector**)malloc(sizeof(vector*) * 15);
 
 
-    if(((*station_object).array_people==NULL)||((*station_object).array_time_personLeft==NULL)||((*station_object).array_time_personVisit==NULL))
-    {
+    if (((*station_object).array_people == NULL) || ((*station_object).array_time_personLeft == NULL) || ((*station_object).array_time_personVisit == NULL)) {
         printf("Failed to allocate memory\n");
         assert(0);
     }
@@ -18,18 +17,16 @@ void init_station(station* station_object, int id, int N)
 
     for (int i = 0; i < 15; ++i) {
 
-        (*station_object).array_time_personLeft[i]=(vector*)malloc(sizeof(vector) * N);
-        (*station_object).array_time_personVisit[i]=(vector*)malloc(sizeof(vector) * N);
+        (*station_object).array_time_personLeft[i] = (vector*)malloc(sizeof(vector) * N);
+        (*station_object).array_time_personVisit[i] = (vector*)malloc(sizeof(vector) * N);
 
 
-        if((*station_object).array_time_personLeft[i]==NULL||(*station_object).array_time_personVisit[i]==NULL)
-        {
+        if ((*station_object).array_time_personLeft[i] == NULL || (*station_object).array_time_personVisit[i] == NULL) {
             printf("Failed to allocate memory\n");
             assert(0);
         }
 
-        for(int j=0;j<N;j++)
-        {
+        for (int j = 0;j < N;j++) {
             init_vector(&(station_object->array_time_personLeft[i][j]));
             init_vector(&(station_object->array_time_personVisit[i][j]));
         }
