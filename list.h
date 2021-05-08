@@ -21,7 +21,7 @@ void updatePeople(person* persons[],int day,LL station_Number,int personNumber);
 void getPrimaryContacts(int Day,person* persons[],station* stations[],LL positive[],int positiveVal,int totalPeople);
 
 
-void updateStations(int Day,station* stations[],,int stationVisit,int stationLeft,int personNumber);
+void updateStations(int Day,station* stations[],int stationVisit,int stationLeft,int personNumber);
 
 
 void getStationContacts_primary(int stationVal,station* stations[],int Day,person* persons[],int totalPeople,LL positivePerson);

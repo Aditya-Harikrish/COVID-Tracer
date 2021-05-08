@@ -3,7 +3,7 @@ METHOD 1 (recommended):
 vector v;
 init_vector(&v);
 pushback(&v, int ele); // to push back ele into v
-popback(v) // to pop back from v
+popback(&v) // to pop back from v
 
 v.size is the the number of elements currently is the vector
 v.capacity is the capacity of the vector
