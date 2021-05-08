@@ -7,6 +7,8 @@
 #include "list.h"
 #include "person_queries.h"
 
+#define clearScreen printf("\e[1;1H\e[2J")
+
 int main()
 {
     /* INPUT */
@@ -116,8 +118,8 @@ int main()
                 printf("Station ID has be >= 0 and < K!");
                 assert(0);
             }
-            
-            int currLocation = location(p[id], day);
+
+            int currLocation = location(p[id], day, 'R');
             /* GET THE CURRENT LOCATION OF THE PERSON */
             //1-3-5
             vector* path;
@@ -125,7 +127,81 @@ int main()
 
         }
         else if (choice == 3) {
+            printf("Enter 1 to access the status of a person.\n");
+            printf("Enter 2 to access the location of a person.\n\n");
 
+            printf("Enter 3 to access the list of COVID-positive people at a particular station.\n");
+            printf("Enter 4 to access the list of primary contacts at a particular station.\n");
+            printf("Enter 5 to access the list of secondary contacts at a particular station.\n\n");
+
+            printf("Enter 6 to access the list of all COVID-positive people.\n");
+            printf("Enter 7 to access the list of all primary contacts.\n");
+            printf("Enter 8 to access the list of all secondary contacts.\n\n");
+
+            printf("Enter 9 to access the danger value of a station.\n");
+
+            int choice3;
+            printf("\nEnter your choice: ");
+            scanf("%d", &choice3);
+
+            int id;
+            switch (choice3) {
+            case 1: case 2: // status and location respectively
+                printf("Enter the ID of the person: ");
+
+                scanf("%d", &id);
+                if (id < 0 || id >= K) {
+                    printf("Invalid ID");
+                    continue;
+                }
+                if (choice3 == 1) status(p[id]);
+                else location(p[id], day, 'P');
+
+                break;
+
+            case 3: // list of +ve people at a particular station
+            case 4: // list of primary contacts at a particular station
+            case 5: // list of secondary contacts at a particular station
+                printf("Enter the station ID: ");
+                scanf("%d", &id);
+                if (id < 0 || id >= N) {
+                    printf("Station ID out of bounds!\n");
+                    continue;
+                }
+
+                if (choice3 == 3) list_positive_at_s(s[id], p, K, 'P');
+                else if (choice3 == 4) list_primary_at_s(s[id], p, K, 'P');
+                else list_secondary_at_s(s[id], p, K, 'P');
+
+                break;
+
+            case 6: // list of all +ve people
+                list_positive(p, K, 'P');
+                break;
+            case 7: // list of all primary contacts
+                list_primary(p, K, 'P');
+                break;
+            case 8: // list of all secondary contacts
+                list_secondary(p, K, 'P');
+                break;
+
+            case 9:
+                printf("Enter the station ID: ");
+                scanf("%d", &id);
+                if (id < 0 || id >= N) {
+                    printf("Station ID out of bounds!\n");
+                    continue;
+                }
+
+                // Use this if the dangerValue data member is being updated:
+                printf("Danger value of station %d is %Lf.\n", id, s[id].dangerValue);
+
+                // Else use this:
+                // printf("Danger value of station %d is %Lf.\n", id, danger_value(s[id], p, K));
+
+            default:
+                printf("Invalid choice!\n");
+            }
         }
         else if (choice == 4) {
             // move_forward_one_day(p, )
@@ -138,7 +214,7 @@ int main()
             printf("Invalid output. Please try again.");
         }
     }
-    
+
     /* DELELTE a */
     for (LL i = 0; i < M; ++i) {
         free(a[i]);

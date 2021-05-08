@@ -130,7 +130,6 @@ int list_secondary_at_s(station s, person* p, int k, char func)
 
 int list_postive_at_s(station s, person* p, int k, char func)
 {
-
     vector v;
     init_vector(&v);
     int sum = 0;
@@ -162,11 +161,11 @@ int location(person p, int curr_day, char func)
         printf("%d", v.arr[v.size - 1]);
 }
 
-double danger_value(station s, person* p, int n)
+double danger_value(station s, person* p, int K)
 {
-    int pos = list_positive_at_s(s, p, n, 'R');
-    int prim = list_primary_at_s(s, p, n, 'R');
-    int sec = list_secondary_at_s(s, p, n, 'R');
+    int pos = list_positive_at_s(s, p, K, 'R');
+    int prim = list_primary_at_s(s, p, K, 'R');
+    int sec = list_secondary_at_s(s, p, K, 'R');
     double x = pos + prim / 5 + sec / 10;
     return x;
 }
