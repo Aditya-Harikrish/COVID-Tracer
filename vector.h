@@ -8,7 +8,7 @@ popback(&v) // to pop back from v
 v.size is the the number of elements currently is the vector
 v.capacity is the capacity of the vector
 DO NOT MODIFY v.size AND v.capacity UNLESS YOU KNOW WHAT YOU'RE DOING.
-The functions mentioned above handle that. 
+The functions mentioned above handle that.
 
 delete_vector(&v); // to clear the contents of the vector
 
@@ -33,7 +33,7 @@ void init_vector(vector* v);
 vector* init_vector_ptr();
 void pushback(vector* v, int ele);
 void print_vector(vector* v);
-void delete_vector(vector *v);
+void delete_vector(vector* v);
 void delete_vector_ptr(vector** v);
 void popback(vector* v);
 
