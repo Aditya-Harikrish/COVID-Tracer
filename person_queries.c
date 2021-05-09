@@ -17,7 +17,7 @@ int list_positive(person* p, int k, char func)
     init_vector(&v);
     int s = 0;
 
-    for (int i = 0; i < k; k++) {
+    for (int i = 0; i < k; i++) {
         if (p[i].status == 1) {
             pushback(&v, p[i].id);
             s++;
@@ -42,7 +42,7 @@ int list_primary(person* p, int k, char func)
     init_vector(&v);
     int s = 0;
 
-    for (int i = 0; i < k; k++) {
+    for (int i = 0; i < k; i++) {
         if (p[i].status == 2) {
             pushback(&v, p[i].id);
             s++;
@@ -67,7 +67,7 @@ int list_secondary(person* p, int k, char func)
     init_vector(&v);
     int s = 0;
 
-    for (int i = 0; i < k; k++) {
+    for (int i = 0; i < k; i++) {
         if (p[i].status == 3) {
             pushback(&v, p[i].id);
             s++;
