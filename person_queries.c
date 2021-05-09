@@ -25,6 +25,11 @@ int list_positive(person* p, int k, char func)
     }
     if (func == 'P')
     {
+        if(v.size == 0)
+        {
+            printf("There are no covid positive persons\n");
+            return 0;
+        }
         for (int i = 0; i < v.size; i++)
         {
             printf("%d", v.arr[i]);
@@ -50,6 +55,11 @@ int list_primary(person* p, int k, char func)
     }
     if (func == 'P')
     {
+        if(v.size == 0)
+        {
+            printf("There are no primary contacts\n");
+            return 0;
+        }
         for (int i = 0; i < v.size; i++)
         {
             printf("%d", v.arr[i]);
@@ -75,6 +85,11 @@ int list_secondary(person* p, int k, char func)
     }
     if (func == 'P')
     {
+        if(v.size == 0)
+        {
+            printf("There are no secondary contacts\n");
+            return 0;
+        }
         for (int i = 0; i < v.size; i++)
         {
             printf("%d", v.arr[i]);
@@ -101,6 +116,11 @@ int list_primary_at_s(station s, person* p, int k, char func)
     }
     if (func == 'P')
     {
+        if(v.size == 0)
+        {
+            printf("There are no primary contacts at %d\n",s.id);
+            return 0;
+        }
         for (int i = 0; i < v.size; i++)
         {
             printf("%d", v.arr[i]);
@@ -127,6 +147,11 @@ int list_secondary_at_s(station s, person* p, int k, char func)
     }
     if (func == 'P')
     {
+        if(v.size == 0)
+        {
+            printf("There are no secondary contacts at %d\n",s.id);
+            return 0;
+        }
         for (int i = 0; i < v.size; i++)
         {
             printf("%d", v.arr[i]);
@@ -152,6 +177,11 @@ int list_positive_at_s(station s, person* p, int k, char func)
     }
     if (func == 'P')
     {
+        if(v.size == 0)
+        {
+            printf("There are no covid positive person at %d\n",s.id);
+            return 0;
+        }
         for (int i = 0; i < v.size; i++)
         {
             printf("/%d", v.arr[i]);
