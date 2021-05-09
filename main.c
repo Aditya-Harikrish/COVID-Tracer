@@ -87,7 +87,6 @@ int main()
         int station_no;
         scanf("%d", &station_no);
         add_travel(&p[i], day, station_no, &s[station_no], i);
-
     }
 
     /* QUERIES */
