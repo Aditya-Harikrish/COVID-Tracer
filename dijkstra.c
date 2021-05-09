@@ -107,7 +107,7 @@ vector* get_safest_shortest(int s, int d, int num_st, int** adj_matrix, station 
 }
 
 // gives the shortest path according to the total distance
-int give_shortest_path(vector* S, vector* T, int matrix[][num_stations])
+int give_shortest_path(vector* S, vector* T, int** matrix)
 {
     // total_distance for both parts
     int total_dist_1 = 0;
@@ -138,7 +138,7 @@ int give_shortest_path(vector* S, vector* T, int matrix[][num_stations])
 }
 
 // getting the safest path among all
-double first_safest(int matrix[][num_stations], vector* P1, station arr[])
+double first_safest(int** matrix, vector* P1, station arr[])
 {
     double danger_1 =  dijkstra_safety(matrix, arr, P1);
     return danger_1;
@@ -165,7 +165,7 @@ int safest_station(double danger_path[], bool traversed[], int dist[])
 }
 
 // dijkstra implementation using the danger value as the cost
-double dijkstra_safety(int graph[num_stations][num_stations], station arr[], vector* P)
+double dijkstra_safety(int** graph, station arr[], vector* P)
 {
     double danger_val_path[num_stations];
     bool traversed[num_stations];
@@ -221,7 +221,7 @@ void get_path(int parent[], vector* P, int tmp_src)
 }
 
 // We use Yen's Algorithm to find the next shortest paths
-double second_safest(int matrix[][num_stations], vector* P1, vector* P2, station arr[])
+double second_safest(int** matrix, vector* P1, vector* P2, station arr[])
 {
     // creating an array of vectors of size being the number of edges in P1
     vector* all_paths[P1->size - 1];
@@ -292,7 +292,7 @@ double second_safest(int matrix[][num_stations], vector* P1, vector* P2, station
     return min;
 }
 
-double third_safest(int matrix[][num_stations], vector* P1, vector* P2, vector* P3, station arr[])
+double third_safest(int** matrix, vector* P1, vector* P2, vector* P3, station arr[])
 {
     // creating an array of vectors of size being the number of edges in P2
     vector* all_paths[P2->size - 1];
