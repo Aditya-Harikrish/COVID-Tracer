@@ -81,11 +81,11 @@ int main() {
         init_station(&s[i], i, N);
 
     int day = 0;
-    for (LL i = 0; i < K; ++i) {
+    for (int i = 0; i < K; ++i) {
         init_person(&p[i]);
         int station_no;
         scanf("%d", &station_no);
-        add_travel(&p[i], day, station_no, &s[station_no], i);
+        add_travel(&p[i],&s[i], day, station_no,i);
 
     }
 
@@ -129,7 +129,7 @@ int main() {
             {
                 for (int i = day, j = 0; j < X || i == 0; i--, j++)
                 {
-                    printf("%d %d",day,v.arr[j]);
+                    printf("%d %d\n",day,primaryContacts_vector_print.arr[j]);
                 }
             }
 
@@ -158,7 +158,7 @@ int main() {
             vector *path;
             path = get_safest_shortest(currLocation, dest, N, a, s);
             for (int i = 0; i < (path->size) - 1; i++) {
-                updatePeople(&p, day, arr[i + 1], id);
+                updatePeople(&p, day, path->arr[i + 1], id);
                 updateStations(day, &s, path->arr[i + 1], path->arr[i], id);
             }
 

@@ -17,7 +17,7 @@
 // We check if a person is Secondary to remove duplicates.
 
 
-void getSecondaryContacts(int Day,person* persons[],station* stations[],vector v,int X);
+void getSecondaryContacts(int Day,person* persons[],station* stations[],vector v,int X,int totalPeople);
 
 
 void getStationContacts_secondary(int stationVal,station* stations[],int Day, person* persons[], int totalPeople, int X);

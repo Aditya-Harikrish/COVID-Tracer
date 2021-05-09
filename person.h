@@ -18,7 +18,7 @@ struct person {
     int changeVal;
 };
 void init_person(person* p);
-void add_travel(person* p, station* s, int day, int destination,&s[station_no],int i);
+void add_travel(person* p, station* s, int day, int destination,int i);
 int getStatus(person* p);
 
 
