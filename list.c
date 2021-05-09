@@ -1,8 +1,8 @@
 #include "list.h"
 
-void updatePeople(person *persons[], int day, LL station_Number,int personNumber)//This has array of persons with each having vectors and has time complexity O(1) if size<capacity else if is size = capacity then it is O(size)
+void updatePeople(person *persons, int day, LL station_Number,int personNumber)//This has array of persons with each having vectors and has time complexity O(1) if size<capacity else if is size = capacity then it is O(size)
 {
-    pushback(&(persons[personNumber]->stations_visited[day % 15]),station_Number);//this adds the station to the visited vector on that day
+    pushback(&((persons)[personNumber].stations_visited[day % 15]),station_Number);//this adds the station to the visited vector on that day
 }
 //The purpose of updatePeople is that it updates the stations that person visited on that day.
 //It pushes the station the person is going to visit into the vector
