@@ -127,7 +127,7 @@ int main()
             int X;
             scanf("%d", &X);
 
-            primaryContacts_vector_print = getPrimaryContacts(day, &p, &s, A, positiveVal, K, X);
+            primaryContacts_vector_print = getPrimaryContacts_print(day, &p, &s, A, positiveVal, K, X);
             secondaryContacts_vector_print = getSecondaryContacts_print(day, &p, &s, primaryContacts_vector, X, K);
 
             primaryContacts_vector = getPrimaryContacts(day, &p, &s, A, positiveVal, K, X);
