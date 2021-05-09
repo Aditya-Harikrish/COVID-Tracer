@@ -36,3 +36,5 @@ void init_station(station *station_object, int id, int K) {
             station_object->array_people[i] = 0;
         }
     }
+}
+
