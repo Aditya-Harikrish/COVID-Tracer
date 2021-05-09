@@ -77,7 +77,7 @@ vector getSecondaryContacts_print(int Day,person* persons[],station* stations[],
             while(k < persons[v.size]->stations_visited[Daycount%15].size) // Checks all the Stations that a Primary Contact has visited from the day he 
             {                                                               //became a Primary contact  to the Present Day
                 int stationNum = persons[v.arr[k]]->stations_visited[Daycount%15].arr[k]; // the station that a Primary contact visited on a particular day 
-                w=getStationContacts_secondary(stationNum,stations,Day,persons,totalPeople, v.arr[k]);
+                w=getStationContacts_secondary_print(stationNum,stations,Day,persons,totalPeople, v.arr[k]);
                 //getStationContacts_secondary computes all the Secondary Contacts in a particular station on a particular day
                 
             }

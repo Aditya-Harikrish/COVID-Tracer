@@ -112,10 +112,7 @@ if (choice == 1) {
             init_vector(&primaryContacts_vector);
             vector primaryContacts_vector_print;
             init_vector(&primaryContacts_vector_print);
-            
-            
-            vector secondaryContacts_vector;
-            init_vector(&secondaryContacts_vector);
+
             vector secondaryContacts_vector_print;
             init_vector(&secondaryContacts_vector_print);
 
@@ -129,11 +126,12 @@ if (choice == 1) {
             int X;
             scanf("%d", &X);
 
-            primaryContacts_vector = getPrimaryContacts(day, &p, &s, A, positiveVal, K, X);
-            secondaryContacts_vector=getSecondaryContacts(day,&p,&s,primaryContacts_vector,X,K);
-
             primaryContacts_vector_print = getPrimaryContacts(day, &p, &s, A, positiveVal, K, X);
-            secondaryContacts_vector_print= getSecondaryContacts(day,&p,&s,primaryContacts_vector,X,K);
+            secondaryContacts_vector_print= getSecondaryContacts_print(day,&p,&s,primaryContacts_vector,X,K);
+
+            primaryContacts_vector = getPrimaryContacts(day, &p, &s, A, positiveVal, K, X);
+            getSecondaryContacts(day,&p,&s,primaryContacts_vector,X,K);
+
 
             printf("Do you want to take the output into a file for plotting the number of primary contacts on each day (0/1)  ??\n");
             int val;

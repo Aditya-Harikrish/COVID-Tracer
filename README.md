@@ -31,7 +31,7 @@
     Enter 3 to inquire about a person.
     Enter 4 to move forward by one day
     Enter 9 to quit.
-    2. If 1 is entered, then enter an integer H for the number of people tested positive on that day and the next H integers for the id of the person tested positive.The next line contains an integer X for the number primary and secondary contacts for the last X days.Next the input can be 1 or 0 whether the person wants a to take the output for plotting the graph or not respectively.
+    2. If 1 is entered, then enter an integer H for the number of people tested positive on that day and the next H integers for the id of the person tested positive.The next line contains an integer X for the number primary and secondary contacts for the last X days.Next the input can be 1 or 0 whether the person wants a to take the output for plotting primary contacts to the graph or not respectively.Next the input can be 1 or 0 whether the person wants a to take the output for plotting secondary contacts to the graph or not respectively.
     3. If 2 is entered first line contains an integer A which is the person number and the next line follows an integer B which is the destination station which the person is going to. Next press Y to move to destination and N else. If Y is entered, press 1/2/3 depending on the path to be chosen. 
     4. If 3 is entered, enter the following for specific actions
         1. Enter 1 to access the status of a person.
