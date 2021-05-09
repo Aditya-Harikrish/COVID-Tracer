@@ -7,7 +7,7 @@ typedef struct station station;
 struct station {
     int id;
     double dangerValue;
-    //vector persons_visited[15];
+    //vector persons_visited[15]; // Discarded
     int* array_people;
     int* Arraytotal;
     vector** array_time_personVisit;//P1:1  P2:2

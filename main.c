@@ -102,10 +102,10 @@ int main() {
         scanf("%d", &choice);
 
 
-        //Here choice 1 is the function for getting primary and secondary contacts.
-        // For more info on how each of the function works go to list.h and list.c for the primary contacts
-        //and visit list1.h and list1.c for the info of function on how the secondary contact works
-        
+/* Here choice 1 is the function for getting primary and secondary contacts.
+For more info on how each of the function works: 
+(a) go to list.h and list.c for primary contacts
+(b) visit list1.h and list1.c for info about secondary contacts. */
 if (choice == 1) {
             int positiveVal;
             vector primaryContacts_vector;
