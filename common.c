@@ -10,3 +10,7 @@ void move_forward_one_day(person* p, station* s, int *day,int totalPeople,int to
         }
     }
 }
+//This function  increases the day by 1 and updates the Arraypeople to the person's last present station in a day.
+//The purpose of doing this is since Arraypeople keeps a track of the person's presence in any point of time in that particular day,
+// His presence will be same as that of the last present station on the previous day.
+// This also removes the station history of stations visited by a particular person on the following day if it is present.

@@ -82,11 +82,12 @@ int main()
         init_station(&s[i], i, N);
 
     int day = 0;
-    for (LL i = 0; i < K; ++i) {
+    for (int i = 0; i < K; ++i) {
         init_person(&p[i]);
         int station_no;
         scanf("%d", &station_no);
-        add_travel(&p[i], day, station_no, &s[station_no], i);
+        add_travel(&p[i], &s[i], day, station_no, i);
+
     }
 
     /* QUERIES */
@@ -101,6 +102,11 @@ int main()
         printf("Your choice: ");
         scanf("%d", &choice);
 
+
+        /* Here choice 1 is the function for getting primary and secondary contacts.
+        For more info on how each of the function works:
+        (a) go to list.h and list.c for primary contacts
+        (b) visit list1.h and list1.c for info about secondary contacts. */
         if (choice == 1) {
             int positiveVal;
             vector primaryContacts_vector;
@@ -108,7 +114,11 @@ int main()
             vector primaryContacts_vector_print;
             init_vector(&primaryContacts_vector_print);
 
+            vector secondaryContacts_vector_print;
+            init_vector(&secondaryContacts_vector_print);
+
             scanf("%d", &positiveVal);
+
             LL A[positiveVal];
             for (int i = 0; i < positiveVal; i++) {
                 scanf("%lld", &A[i]);
@@ -117,19 +127,38 @@ int main()
             int X;
             scanf("%d", &X);
 
+            primaryContacts_vector_print = getPrimaryContacts(day, &p, &s, A, positiveVal, K, X);
+            secondaryContacts_vector_print = getSecondaryContacts_print(day, &p, &s, primaryContacts_vector, X, K);
+
             primaryContacts_vector = getPrimaryContacts(day, &p, &s, A, positiveVal, K, X);
             getSecondaryContacts(day, &p, &s, primaryContacts_vector, X, K);
 
-            primaryContacts_vector_print = getPrimaryContacts(day, &p, &s, A, positiveVal, K, X);
 
             printf("Do you want to take the output into a file for plotting the number of primary contacts on each day (0/1)  ??\n");
             int val;
             scanf("%d", &val);
             if (val == 1) {
                 for (int i = day, j = 0; j < X || i == 0; i--, j++) {
-                    printf("%d %d", day, v.arr[j]);
+                    //printf("%d %d\n",day,primaryContacts_vector_print.arr[j]);
+                    FILE* fptr;
+                    fptr = fopen("primary_contacts.txt", "w");
+                    fprintf(fptr, "%d %d\n", day, primaryContacts_vector_print.arr[j]);
+                    fclose(fptr);
                 }
             }
+
+            printf("Do you want to take the output into a file for plotting the number of secondary contacts on each day (0/1)  ??\n");
+
+            scanf("%d", &val);
+            if (val == 1) {
+                for (int i = day, j = 0; j < X || i == 0; i--, j++) {
+                    FILE* fptr;
+                    fptr = fopen("secondary_contacts.txt", "w");
+                    fprintf(fptr, "%d %d\n", day, secondaryContacts_vector_print.arr[j]);
+                    fclose(fptr);
+                }
+            }
+
 
             for (int i = 0;i < positiveVal;i++) {
                 p[A[i]].status = QUARANTINED;
@@ -156,7 +185,7 @@ int main()
             vector* path;
             path = get_safest_shortest(currLocation, dest, N, a, s);
             for (int i = 0; i < (path->size) - 1; i++) {
-                updatePeople(&p, day, arr[i + 1], id);
+                updatePeople(&p, day, path->arr[i + 1], id);
                 updateStations(day, &s, path->arr[i + 1], path->arr[i], id);
             }
 
@@ -240,10 +269,11 @@ int main()
             }
         }
         else if (choice == 4) {
-            move_forward_one_day(p, s, &day, K, N);
+            move_forward_one_day(p, s, &day, K, N);//The function's purpose is to increase day by 1 and some other things that are needed for the program to work
+                                                //Visit common.c for more info on the purpose of this function
         }
         else if (choice == 9) {
-            printf("Goodbye!\n");
+            printf("\nGoodbye!\n");
             break;
         }
         else {

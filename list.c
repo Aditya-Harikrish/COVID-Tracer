@@ -16,7 +16,7 @@ void updateStations(int Day, station *stations[], int stationVisit, int stationL
 }
 //The purpose of UpdateStations is that it updates the stations array_people and Arraytotal
 //array_people will tell the presence of the person in the visiting station and his absence in the left station
-//Arraytotal will keep a check whether that person entered that station or not
+//Arraytotal will keep a check whether that person entered that station or not in that particular day
 
 
 //Here in getPrimaryContacts we go under the assumption that if a positive person enters the station, that station is effected and will make all the people who enter it primary contact.
