@@ -105,12 +105,19 @@ int main() {
         //Here choice 1 is the function for getting primary and secondary contacts.
         // For more info on how each of the function works go to list.h and list.c for the primary contacts
         //and visit list1.h and list1.c for the info of function on how the secondary contact works
-        if (choice == 1) {
+        
+if (choice == 1) {
             int positiveVal;
             vector primaryContacts_vector;
             init_vector(&primaryContacts_vector);
             vector primaryContacts_vector_print;
             init_vector(&primaryContacts_vector_print);
+            
+            
+            vector secondaryContacts_vector;
+            init_vector(&secondaryContacts_vector);
+            vector secondaryContacts_vector_print;
+            init_vector(&secondaryContacts_vector_print);
 
             scanf("%d", &positiveVal);
 
@@ -123,9 +130,10 @@ int main() {
             scanf("%d", &X);
 
             primaryContacts_vector = getPrimaryContacts(day, &p, &s, A, positiveVal, K, X);
-            getSecondaryContacts(day,&p,&s,primaryContacts_vector,X,K);
+            secondaryContacts_vector=getSecondaryContacts(day,&p,&s,primaryContacts_vector,X,K);
 
             primaryContacts_vector_print = getPrimaryContacts(day, &p, &s, A, positiveVal, K, X);
+            secondaryContacts_vector_print= getSecondaryContacts(day,&p,&s,primaryContacts_vector,X,K);
 
             printf("Do you want to take the output into a file for plotting the number of primary contacts on each day (0/1)  ??\n");
             int val;
@@ -141,6 +149,21 @@ int main() {
                     fclose(fptr);
                 }
             }
+            
+            printf("Do you want to take the output into a file for plotting the number of secondary contacts on each day (0/1)  ??\n");
+            
+            scanf("%d",&val);
+            if(val==1)
+            {
+                for (int i = day, j = 0; j < X || i == 0; i--, j++)
+                {
+                    FILE *fptr;
+                    fptr = fopen("secondary_contacts.txt", "w");
+                    fprintf(fptr, "%d %d\n",day,secondaryContacts_vector_print.arr[j]);
+                    fclose(fptr);
+                }
+            }
+            
 
             for(int i=0;i<positiveVal;i++)
             {
