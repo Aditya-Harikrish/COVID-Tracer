@@ -1,8 +1,8 @@
 CC=gcc
 
 
-init: main.o common.o list.o person_queries.o person.o station.o vector.o dijkshtra.o list1.o
-	$(CC) -g main.o common.o list.o person_queries.o person.o station.o vector.o dijkshtra.o list1.o -o CovidTracing
+init: main.o common.o list.o person_queries.o person.o station.o vector.o dijkstra.o list1.o
+	$(CC) -g main.o common.o list.o person_queries.o person.o station.o vector.o dijkstra.o list1.o -o CovidTracing
 
 main.o: main.c
 	$(CC) -c main.c
