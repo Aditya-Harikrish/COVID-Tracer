@@ -22,11 +22,14 @@ person.o: person.c
 station.o: station.c
 	$(CC) -c station.c
 
-dijkshtra.o: dijkshtra.c
-	$(CC) -c dijkshtra.c
+dijkstra.o: dijkstra.c
+	$(CC) -c dijkstra.c
 
 list1.o: list1.c
 	$(CC) -c list1.c
+
+vector.o: vector.c
+	$(CC) -c vector.c
 
 clean:
 	rm -rf *.o CovidTracing

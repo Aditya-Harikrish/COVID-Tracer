@@ -53,6 +53,29 @@
 2. numpy
 3. matplotlib
 
+## Instruction to use Makefile
+    1.  Command:    make init    or    make
+            This command compiles all subfunctions and make their object file and  the final executable named CovidTracing
+    2.  Command:    make common.o
+            This command compiles common.c and builds its object file common.o
+    3.  Command:    make dijkstra.o
+            This command compiles dijkstra.c and builds its object file dijkstra.o
+    4.  Command:    make list.o
+            This command compiles list.c and builds its object file list.o
+    5.  Command:    make list1.o
+            This command compiles list1.c and builds its object file list1.o
+    6.  Command:    make person_queries.o
+            This command compiles person_queries.c and builds its object file person_queries.o
+    7.  Command:    make person.o
+            This command compiles person.c and builds its object file person.o
+    8.  Command:    make station.o
+            This command compiles station.c and builds its object file station.o
+    9.  Command:    make vector.o
+            This command compiles vector.c and builds its object file vector.o
+    10. Command:    make clean
+            This command removes all the object files and the final executable file.
+
+
 
 
 <!--2. A person, if declared a primary contact, will maintain the said status for 15 days from the time of contact with >
