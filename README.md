@@ -32,8 +32,27 @@
     Enter 4 to move forward by one day
     Enter 9 to quit.
     2. If 1 is entered, then enter an integer H for the number of people tested positive on that day and the next H integers for the id of the person tested positive.The next line contains an integer X for the number primary and secondary contacts for the last X days.Next the input can be 1 or 0 whether the person wants a to take the output for plotting the graph or not respectively.
-    3. If 2 is entered
+    3. If 2 is entered first line contains an integer A which is the person number and the next line follows an integer B which is the destination station which the person is going to. Next press Y to move to destination and N else. If Y is entered, press 1/2/3 depending on the path to be chosen. 
+    4. If 3 is entered, enter the following for specific actions
+        1. Enter 1 to access the status of a person.
+        2. Enter 2 to access the location of a person.
+        3. Enter 3 to access the list of COVID-positive people at a particular station.
+        4. Enter 4 to access the list of primary contacts at a particular station.
+        5. Enter 5 to access the list of secondary contacts at a particular station.
+        6. Enter 6 to access the list of all COVID-positive people.
+        7. Enter 7 to access the list of all primary contacts.
+        8. Enter 8 to access the list of all secondary contacts.
+        9. Enter 9 to access the danger value of a station.
+        - If 1 or 2 is entered, in the next line the person id is to be entered.
+        - If 3,4 or 5 is entered in the next line the station id is to be entered.
+        - if 9 is entered in the next line the station id is to be entered.
+
+## Extra softwares that are to be installed
+
+1. pip
+2. numpy
+3. matplotlib
 
 
 
-[//]: <2. A person, if declared a primary contact, will maintain the said status for 15 days from the time of contact with >
+<!--2. A person, if declared a primary contact, will maintain the said status for 15 days from the time of contact with >

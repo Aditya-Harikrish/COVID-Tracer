@@ -101,6 +101,10 @@ int main() {
         printf("Your choice: ");
         scanf("%d", &choice);
 
+
+        //Here choice 1 is the function for getting primary and secondary contacts.
+        // For more info on how each of the function works go to list.h and list.c for the primary contacts
+        //and visit list1.h and list1.c for the info of function on how the secondary contact works
         if (choice == 1) {
             int positiveVal;
             vector primaryContacts_vector;
@@ -245,7 +249,8 @@ int main() {
                     printf("Invalid choice!\n");
             }
         } else if (choice == 4) {
-            move_forward_one_day(p,s, &day,K,N);
+            move_forward_one_day(p,s, &day,K,N);//The function's purpose is to increase day by 1 and some other things that are needed for the program to work
+                                                //Visit common.c for more info on the purpose of this function
         } else if (choice == 9) {
             printf("Goodbye!\n");
             break;
