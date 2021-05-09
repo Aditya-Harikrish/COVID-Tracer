@@ -10,17 +10,18 @@
 
 #define clearScreen printf("\e[1;1H\e[2J")
 
-int main() {
+int main()
+{
     /* INPUT */
     LL N, M, K;
     scanf("%lld %lld %lld", &N, &M, &K);
-    int **a = (int **) malloc(sizeof(int *) * N);
+    int** a = (int**)malloc(sizeof(int*) * N);
     if (a == NULL) {
         printf("Failed to allocate memory to a\n");
         assert(0);
     }
     for (LL i = 0; i < N; ++i) {
-        a[i] = (int *) malloc(sizeof(double) * N);
+        a[i] = (int*)malloc(sizeof(double) * N);
         if (a[i] == NULL) {
             printf("Failed to allocate memory to a[%lld]\n", i);
             assert(0);
@@ -68,8 +69,8 @@ int main() {
         a[U][V] = W;
         a[V][U] = W;
     }
-    person *p = (person *) malloc(sizeof(person) * K);
-    station *s = (station *) malloc(sizeof(station) * N);
+    person* p = (person*)malloc(sizeof(person) * K);
+    station* s = (station*)malloc(sizeof(station) * N);
     if (p == NULL || s == NULL) {
         printf("Failed to allocate memory!\n");
         assert(0);
@@ -118,27 +119,25 @@ int main() {
             scanf("%d", &X);
 
             primaryContacts_vector = getPrimaryContacts(day, &p, &s, A, positiveVal, K, X);
-            getSecondaryContacts(day,&p,&s,primaryContacts_vector,X,K);
+            getSecondaryContacts(day, &p, &s, primaryContacts_vector, X, K);
 
             primaryContacts_vector_print = getPrimaryContacts(day, &p, &s, A, positiveVal, K, X);
 
             printf("Do you want to take the output into a file for plotting the number of primary contacts on each day (0/1)  ??\n");
             int val;
-            scanf("%d",&val);
-            if(val==1)
-            {
-                for (int i = day, j = 0; j < X || i == 0; i--, j++)
-                {
-                    printf("%d %d",day,v.arr[j]);
+            scanf("%d", &val);
+            if (val == 1) {
+                for (int i = day, j = 0; j < X || i == 0; i--, j++) {
+                    printf("%d %d", day, v.arr[j]);
                 }
             }
 
-            for(int i=0;i<positiveVal;i++)
-            {
-                p[A[i]].status=QUARANTINED;
+            for (int i = 0;i < positiveVal;i++) {
+                p[A[i]].status = QUARANTINED;
             }
 
-        } else if (choice == 2) {
+        }
+        else if (choice == 2) {
             printf("Enter person number: ");
             int id;
             scanf("%d", &id);
@@ -155,14 +154,15 @@ int main() {
             }
 
             int currLocation = location(p[id], day, 'R');
-            vector *path;
+            vector* path;
             path = get_safest_shortest(currLocation, dest, N, a, s);
             for (int i = 0; i < (path->size) - 1; i++) {
                 updatePeople(&p, day, arr[i + 1], id);
                 updateStations(day, &s, path->arr[i + 1], path->arr[i], id);
             }
 
-        } else if (choice == 3) {
+        }
+        else if (choice == 3) {
             printf("Enter 1 to access the status of a person.\n");
             printf("Enter 2 to access the location of a person.\n\n");
 
@@ -182,69 +182,72 @@ int main() {
 
             int id;
             switch (choice3) {
-                case 1:
-                case 2: // status and location respectively
-                    printf("Enter the ID of the person: ");
+            case 1:
+            case 2: // status and location respectively
+                printf("Enter the ID of the person: ");
 
-                    scanf("%d", &id);
-                    if (id < 0 || id >= K) {
-                        printf("Invalid ID");
-                        continue;
-                    }
-                    if (choice3 == 1) status(p[id]);
-                    else location(p[id], day, 'P');
+                scanf("%d", &id);
+                if (id < 0 || id >= K) {
+                    printf("Invalid ID");
+                    continue;
+                }
+                if (choice3 == 1) status(p[id]);
+                else location(p[id], day, 'P');
 
-                    break;
+                break;
 
-                case 3: // list of +ve people at a particular station
-                case 4: // list of primary contacts at a particular station
-                case 5: // list of secondary contacts at a particular station
-                    printf("Enter the station ID: ");
-                    scanf("%d", &id);
-                    if (id < 0 || id >= N) {
-                        printf("Station ID out of bounds!\n");
-                        continue;
-                    }
+            case 3: // list of +ve people at a particular station
+            case 4: // list of primary contacts at a particular station
+            case 5: // list of secondary contacts at a particular station
+                printf("Enter the station ID: ");
+                scanf("%d", &id);
+                if (id < 0 || id >= N) {
+                    printf("Station ID out of bounds!\n");
+                    continue;
+                }
 
-                    if (choice3 == 3) list_positive_at_s(s[id], p, K, 'P');
-                    else if (choice3 == 4) list_primary_at_s(s[id], p, K, 'P');
-                    else list_secondary_at_s(s[id], p, K, 'P');
+                if (choice3 == 3) list_positive_at_s(s[id], p, K, 'P');
+                else if (choice3 == 4) list_primary_at_s(s[id], p, K, 'P');
+                else list_secondary_at_s(s[id], p, K, 'P');
 
-                    break;
+                break;
 
-                case 6: // list of all +ve people
-                    list_positive(p, K, 'P');
-                    break;
-                case 7: // list of all primary contacts
-                    list_primary(p, K, 'P');
-                    break;
-                case 8: // list of all secondary contacts
-                    list_secondary(p, K, 'P');
-                    break;
+            case 6: // list of all +ve people
+                list_positive(p, K, 'P');
+                break;
+            case 7: // list of all primary contacts
+                list_primary(p, K, 'P');
+                break;
+            case 8: // list of all secondary contacts
+                list_secondary(p, K, 'P');
+                break;
 
-                case 9:
-                    printf("Enter the station ID: ");
-                    scanf("%d", &id);
-                    if (id < 0 || id >= N) {
-                        printf("Station ID out of bounds!\n");
-                        continue;
-                    }
+            case 9:
+                printf("Enter the station ID: ");
+                scanf("%d", &id);
+                if (id < 0 || id >= N) {
+                    printf("Station ID out of bounds!\n");
+                    continue;
+                }
 
-                    // Use this if the dangerValue data member is being updated:
-                    printf("Danger value of station %d is %lf.\n", id, s[id].dangerValue);
+                // Use this if the dangerValue data member is being updated:
+                printf("Danger value of station %d is %lf.\n", id, s[id].dangerValue);
 
-                    // Else use this:
-                    // printf("Danger value of station %d is %Lf.\n", id, danger_value(s[id], p, K));
+                // Else use this:
+                // printf("Danger value of station %d is %Lf.\n", id, danger_value(s[id], p, K));
 
-                default:
-                    printf("Invalid choice!\n");
+            default:
+                printf("Invalid choice!\n");
             }
-        } else if (choice == 4) {
-            move_forward_one_day(p,s, &day,K,N);
-        } else if (choice == 9) {
+        }
+        else if (choice == 4) {
+            move_forward_one_day(p, s, &day, K, N);
+        }
+        else if (choice == 9) {
             printf("Goodbye!\n");
             break;
-        } else {
+        }
+        else {
             printf("Invalid output. Please try again.");
         }
     }
