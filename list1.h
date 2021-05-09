@@ -22,4 +22,10 @@ void getSecondaryContacts(int Day,person* persons[],station* stations[],vector v
 
 void getStationContacts_secondary(int stationVal,station* stations[],int Day, person* persons[], int totalPeople, int X);
 
+// For printing Secondary contacts on a day.
+
+vector getSecondaryContacts_print(int Day,person* persons[],station* stations[],vector v,int X,int totalPeople);
+
+vector getStationContacts_secondary_print(int stationVal,station* stations[],int Day, person* persons[], int totalPeople, int X);
+
 #endif
