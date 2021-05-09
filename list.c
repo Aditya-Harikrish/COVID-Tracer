@@ -1,6 +1,6 @@
 #include "list.h"
 
-void updatePeople(person *persons[], int day, LL station_Number,int personNumber)//This has array of persons with each having vectors
+void updatePeople(person *persons[], int day, LL station_Number,int personNumber)//This has array of persons with each having vectors and has time complexity O(1) if size<capacity else if is size = capacity then it is O(size)
 {
     pushback(&(persons[personNumber]->stations_visited[day % 15]),station_Number);//this adds the station to the visited vector on that day
 }
@@ -9,7 +9,8 @@ void updatePeople(person *persons[], int day, LL station_Number,int personNumber
 
 
 
-void updateStations(int Day, station *stations[], int stationVisit, int stationLeft, int personNumber) {
+void updateStations(int Day, station *stations[], int stationVisit, int stationLeft, int personNumber) //time complexity of this is O(1)
+{
     stations[stationVisit]->array_people[personNumber] = 1;
     stations[stationLeft]->array_people[personNumber] = 0;
     stations[stationVisit]->Arraytotal[personNumber] = 1;
@@ -28,7 +29,7 @@ void updateStations(int Day, station *stations[], int stationVisit, int stationL
 
 vector
 getPrimaryContacts(int Day, person *persons[], station *stations[], LL positive[], int positiveVal, int totalPeople,
-                   int X)//positiveVal is the total number of positive people
+                   int X)//positiveVal is the total number of positive people, the time complexity is O(X*stationsVisited by the person)
 {
     vector *v;
     init_vector(v);
@@ -36,11 +37,9 @@ getPrimaryContacts(int Day, person *persons[], station *stations[], LL positive[
     {
         for (int j = 0, l = Day; j < X || l == 0; j++, l--)//this is for keeping a track of all the past 15 days
         {
-            for (int k = 0; k < persons[positiveVal]->stations_visited[l %
-                                                                       15].size; k++) //this gives the stations which the person visited
+            for (int k = 0; k < persons[positiveVal]->stations_visited[l % 15].size; k++) //this gives the stations which the person visited
             {
-                int stationNum = persons[positive[k]]->stations_visited[l %
-                                                                        15].arr[k]; //this gives the station numbers( type int )
+                int stationNum = persons[positive[k]]->stations_visited[l % 15].arr[k]; //this gives the station numbers( type int )
                 v = getStationContacts_primary(stationNum, stations, Day, persons, totalPeople, positive[k],
                                                X);//the person surely visited that station
 
@@ -48,7 +47,7 @@ getPrimaryContacts(int Day, person *persons[], station *stations[], LL positive[
         }
     }
     return *v;
-}
+} // The average time complexity of this function is O(
 //This takes the input from the user as and calls the function getStationContacts_primary
 //The purpose of this function is that it takes a list of stations, people, positive people, present day and the days till the user want the primary contacts and the total number of primary contacts
 //The function first iterates through all the positive people and for each positive person, it gives the stations visited.

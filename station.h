@@ -16,8 +16,9 @@ struct station {
     int positive;
     int primary;
     int secondary;
-
 };
+
+
 void init_station(station* station_object, int id, int K);
 
 
