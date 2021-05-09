@@ -24,7 +24,7 @@ int list_primary(person* p,int k,char func);
 //O(n)
 
 //Takes an array of all person and total number of person and print the list of all secondary contacts
-int list_positive(person* p,int k,char func);
+int list_secondary(person* p,int k,char func);
 //O(n)
 
 //Takes station node,array of all person node and total number of person  and print the list of all primary contacts at that station
