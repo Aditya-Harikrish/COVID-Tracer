@@ -87,7 +87,6 @@ int main()
         int station_no;
         scanf("%d", &station_no);
         add_travel(&p[i], &s[i], day, station_no, i);
-
     }
 
     /* QUERIES */
@@ -188,6 +187,9 @@ int main()
                 updatePeople(&p, day, path->arr[i + 1], id);
                 updateStations(day, &s, path->arr[i + 1], path->arr[i], id);
             }
+
+            s[path->arr[0]].dangerValue= danger_value(s[path->arr[0]],p,K);
+            s[path->arr[path->size]].dangerValue=danger_value(s[path->arr[path->size]],p,K);
 
         }
         else if (choice == 3) {
