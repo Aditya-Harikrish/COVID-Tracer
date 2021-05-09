@@ -138,7 +138,7 @@ int list_secondary_at_s(station s, person* p, int k, char func)
         return sum;
 }
 
-int list_postive_at_s(station s, person* p, int k, char func)
+int list_positive_at_s(station s, person* p, int k, char func)
 {
     vector v;
     init_vector(&v);
