@@ -108,7 +108,7 @@ vector getStationContacts_primary_print(int stationVal,station* stations[],int D
     for (int i = Day, j = 0; j < X || i == 0; i--, j++) {
         int num=0;
         printf("Primary contacts on day: %d\n", i);
-        for (int k = 0;<totalPeople;k++)
+        for (int k = 0;k<totalPeople;k++)
         {
             if (stations[stationVal]->Arraytotal[k] == 1) {
                 if (persons[k]->status != PRIMARY_CONTACT ||
