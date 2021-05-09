@@ -109,6 +109,7 @@ int main() {
             init_vector(&primaryContacts_vector_print);
 
             scanf("%d", &positiveVal);
+
             LL A[positiveVal];
             for (int i = 0; i < positiveVal; i++) {
                 scanf("%lld", &A[i]);
@@ -129,7 +130,11 @@ int main() {
             {
                 for (int i = day, j = 0; j < X || i == 0; i--, j++)
                 {
-                    printf("%d %d\n",day,primaryContacts_vector_print.arr[j]);
+                    //printf("%d %d\n",day,primaryContacts_vector_print.arr[j]);
+                    FILE *fptr;
+                    fptr = fopen("primary_contacts.txt", "w");
+                    fprintf(fptr, "%d %d\n",day,primaryContacts_vector_print.arr[j]);
+                    fclose(fptr);
                 }
             }
 
