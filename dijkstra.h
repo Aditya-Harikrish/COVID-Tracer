@@ -14,7 +14,7 @@ int comp(vector* P1, vector* P3);
 void get_path(int parent[], vector* P, int tmp_src);
 
 // to get the safest station not yet traversed
-int safest_station(double danger_path[], bool traversed[]);
+int safest_station(double danger_path[], bool traversed[], int dist[]);
 
 // decides which path is shortest if they have same danger value
 int give_shortest_path(vector* S, vector* T, int matrix[][num_stations]);
