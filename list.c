@@ -9,11 +9,12 @@ void updatePeople(person *persons[], int day, LL station_Number,int personNumber
 
 
 
-void updateStations(int Day, station *stations[], int stationVisit, int stationLeft, int personNumber) //time complexity of this is O(1)
+void updateStations(int Day, station *stations, int stationVisit, int stationLeft, int personNumber) //time complexity of this is O(1)
 {
-    stations[stationVisit]->array_people[personNumber] = 1;
-    stations[stationLeft]->array_people[personNumber] = 0;
-    stations[stationVisit]->Arraytotal[personNumber] = 1;
+    stations[stationVisit].array_people[personNumber] = 1;
+    stations[stationLeft].array_people[personNumber] = 0;
+    stations[stationVisit].Arraytotal[personNumber] = 1;
+    //updateStations(day, &s, path->arr[i + 1], path->arr[i], id);
 }
 //The purpose of UpdateStations is that it updates the stations array_people and Arraytotal
 //array_people will tell the presence of the person in the visiting station and his absence in the left station

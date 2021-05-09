@@ -14,20 +14,21 @@
 int main()
 {
     /* INPUT */
-    LL N, M, K;
-    scanf("%lld %lld %lld", &N, &M, &K);
+    int N, M, K;
+    scanf("%d %d %d", &N, &M, &K);
     int** a = (int**)malloc(sizeof(int*) * N);
     if (a == NULL) {
         printf("Failed to allocate memory to a\n");
         assert(0);
     }
     for (LL i = 0; i < N; ++i) {
-        a[i] = (int*)malloc(sizeof(double) * N);
+        a[i] = (int*)malloc(sizeof(int) * N);
         if (a[i] == NULL) {
             printf("Failed to allocate memory to a[%lld]\n", i);
             assert(0);
         }
     }
+    //printf("Test-1\n");
 
     // a[i][j] = -1 iff i is not connected to j 
     // If i is connected to j, a[i][j] = length of edge from i to j
@@ -42,11 +43,12 @@ int main()
         }
     }
 
+    //printf("Test-2\n");
 
     for (int i = 0; i < M; ++i) {
-        LL U, V;
+        int U, V;
         double W;
-        scanf("%lld%lld%lf", &U, &V, &W);
+        scanf("%d%d%lf", &U, &V, &W);
         if (U < 0 || U >= N) {
             printf("U is out of bounds\n");
             printf("Assert failed for i = %d\n", i);
@@ -70,6 +72,8 @@ int main()
         a[U][V] = W;
         a[V][U] = W;
     }
+    //printf("Test-3\n");
+
     person* p = (person*)malloc(sizeof(person) * K);
     station* s = (station*)malloc(sizeof(station) * N);
     if (p == NULL || s == NULL) {
@@ -80,14 +84,14 @@ int main()
         init_person(&p[i]);
 
     for (int i = 0; i < N; ++i)
-        init_station(&s[i], i, N);
+        init_station(&s[i], i, K);
 
     int day = 0;
     for (int i = 0; i < K; ++i) {
-        init_person(&p[i]);
+        //init_person(&p[i]);
         int station_no;
         scanf("%d", &station_no);
-        add_travel(&p[i], &s[i], day, station_no, i);
+        add_travel(&p[i], s, day, station_no, i);
     }
 
     /* QUERIES */
@@ -128,6 +132,7 @@ int main()
             scanf("%d", &X);
 
             primaryContacts_vector_print = getPrimaryContacts(day, &p, &s, A, positiveVal, K, X);
+            printf("ehrbhrtbhvbrth\n");
             secondaryContacts_vector_print = getSecondaryContacts_print(day, &p, &s, primaryContacts_vector, X, K);
 
             primaryContacts_vector = getPrimaryContacts(day, &p, &s, A, positiveVal, K, X);
@@ -182,16 +187,21 @@ int main()
             }
 
             int currLocation = location(p[id], day, 'R');
-            vector* path;
+            vector* path = init_vector_ptr();
             path = get_safest_shortest(currLocation, dest, N, a, s);
-            for (int i = 0; i < (path->size) - 1; i++) {
-                updatePeople(&p, day, path->arr[i + 1], id);
-                updateStations(day, &s, path->arr[i + 1], path->arr[i], id);
-            }
 
-            s[path->arr[0]].dangerValue= danger_value(s[path->arr[0]],p,K);
-            s[path->arr[path->size]].dangerValue=danger_value(s[path->arr[path->size]],p,K);
-
+            if(path != NULL)
+            {
+                for (int i = 0; i < (path->size) - 1; i++) {
+                    updatePeople(&p, day, path->arr[i + 1], id);
+                    printf("Test-4\n");
+                    updateStations(day, s, path->arr[i + 1], path->arr[i], id);
+                    printf("Test-5\n");
+                }
+                s[path->arr[0]].dangerValue= danger_value(s[path->arr[0]],p,K);
+                s[path->arr[path->size - 1]].dangerValue=danger_value(s[path->arr[path->size - 1]],p,K);
+                printf("Test-6\n");
+            }          
         }
         else if (choice == 3) {
             printf("Enter 1 to access the status of a person.\n");

@@ -28,7 +28,7 @@ vector getPrimaryContacts_print(int Day,person* persons[],station* stations[],LL
 //If that person is not primary or positive person or a quarantined person, he is considered a primary contact and his value is pushed into
 // the vector of primary contacts
 
-void updateStations(int Day,station* stations[],int stationVisit,int stationLeft,int personNumber);
+void updateStations(int Day,station* stations,int stationVisit,int stationLeft,int personNumber);
 //The purpose of UpdateStations is that it updates the stations array_people and Arraytotal
 //array_people will tell the presence of the person in the visiting station and his absence in the left station
 //Arraytotal will keep a check whether that person entered that station or not in that particular day

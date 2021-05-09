@@ -64,7 +64,7 @@ vector* get_safest_shortest(int s, int d, int num_st, int** adj_matrix, station 
 
     char ch;
     int path_num;
-    printf("Do you want to traverse? (0/1): ");
+    printf("Do you want to traverse? (Y/n): ");
     scanf(" %c", &ch);
 
     // asking for path only if the user says Yes
