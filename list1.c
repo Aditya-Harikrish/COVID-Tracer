@@ -89,15 +89,17 @@ vector getSecondaryContacts_print(int Day,person* persons[],station* stations[],
 //This is the same function as getSecondaryContacts but is needed for the printing purpose
 
 vector getStationContacts_secondary_print(int stationVal,station* stations[],int Day, person* persons[], int totalPeople, int X)
+{
     vector *w;
     init_vector(w);
-    for (int i = Day, j = 0; j < X || i == 0; i--, j++) {  // To check all the days
+    for (int i = Day, j = 0; j < X || i == 0; i--, j++)
+    {  // To check all the days
         int count=0;
         printf("Secondary contacts on day: %d\n", i);
-        for (int k = 0;<totalPeople;k++)  // All the people have to be checked.
+        for (int k = 0;k<totalPeople;k++)  // All the people have to be checked.
         {
-            if (station[stationVal]->Arraytotal[k] == 1) {
-                if (persons[k]->status != PRIMARY_CONTACT && persons[k]->status != POSITIVE && persons[k]->status != QUARANTINED && persons[k]!=SECONDARY_CONTACT)
+            if (stations[stationVal]->Arraytotal[k] == 1) {
+                if (persons[k]->status != PRIMARY_CONTACT && persons[k]->status != POSITIVE && persons[k]->status != QUARANTINED && persons[k]->status!=SECONDARY_CONTACT)
                 {
                     count++;
                 }
@@ -105,7 +107,7 @@ vector getStationContacts_secondary_print(int stationVal,station* stations[],int
             
             
         }
-        pushback(w, num);
+        pushback(w, count);
     }
     return *w;
 }
