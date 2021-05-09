@@ -39,10 +39,10 @@ void getStationContacts_secondary(int stationVal,station* stations[],int Day, pe
 
     while( k<totalPeople) // For all the people we need to check whether they are Secondary People
     {
-        for (int i=Day, j=0;j<X|| i>=persons[k]->statusChangeDay, i--,j++) // We need to keep track of all the people the Primary Contact was in contact with from the day he bacame a primary contact to the Present Day.
+        for (int i=Day, j=0;j<X|| i>=persons[k]->statusChangeDay; i--,j++) // We need to keep track of all the people the Primary Contact was in contact with from the day he bacame a primary contact to the Present Day.
         {
 
-            if (station[stationVal]->Arraytotal[k]==1)  // if the station is visited by the primary contact.
+            if (stations[stationVal]->Arraytotal[k]==1)  // if the station is visited by the primary contact.
             {
                 if (persons[k]->status!= POSITIVE && persons[k]->status!=PRIMARY_CONTACT && persons[k]->status!=QUARANTINED && persons[k]->status!=SECONDARY_CONTACT) 
                 {
@@ -77,7 +77,7 @@ vector getSecondaryContacts_print(int Day,person* persons[],station* stations[],
             while(k < persons[v.size]->stations_visited[Daycount%15].size) // Checks all the Stations that a Primary Contact has visited from the day he 
             {                                                               //became a Primary contact  to the Present Day
                 int stationNum = persons[v.arr[k]]->stations_visited[Daycount%15].arr[k]; // the station that a Primary contact visited on a particular day 
-                w=getStationContacts_secondary_print(stationNum,stations,Day,persons,totalPeople, v.arr[k]);
+                *w=getStationContacts_secondary_print(stationNum,stations,Day,persons,totalPeople, v.arr[k]);
                 //getStationContacts_secondary computes all the Secondary Contacts in a particular station on a particular day
                 
             }
@@ -89,15 +89,17 @@ vector getSecondaryContacts_print(int Day,person* persons[],station* stations[],
 //This is the same function as getSecondaryContacts but is needed for the printing purpose
 
 vector getStationContacts_secondary_print(int stationVal,station* stations[],int Day, person* persons[], int totalPeople, int X)
+{
     vector *w;
     init_vector(w);
-    for (int i = Day, j = 0; j < X || i == 0; i--, j++) {  // To check all the days
+    for (int i = Day, j = 0; j < X || i == 0; i--, j++)
+    {  // To check all the days
         int count=0;
         printf("Secondary contacts on day: %d\n", i);
-        for (int k = 0;<totalPeople;k++)  // All the people have to be checked.
+        for (int k = 0;k<totalPeople;k++)  // All the people have to be checked.
         {
-            if (station[stationVal]->Arraytotal[k] == 1) {
-                if (persons[k]->status != PRIMARY_CONTACT && persons[k]->status != POSITIVE && persons[k]->status != QUARANTINED && persons[k]!=SECONDARY_CONTACT)
+            if (stations[stationVal]->Arraytotal[k] == 1) {
+                if (persons[k]->status != PRIMARY_CONTACT && persons[k]->status != POSITIVE && persons[k]->status != QUARANTINED && persons[k]->status!=SECONDARY_CONTACT)
                 {
                     count++;
                 }
@@ -105,7 +107,7 @@ vector getStationContacts_secondary_print(int stationVal,station* stations[],int
             
             
         }
-        pushback(w, num);
+        pushback(w, count);
     }
     return *w;
 }
