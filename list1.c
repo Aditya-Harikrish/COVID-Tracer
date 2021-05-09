@@ -39,10 +39,10 @@ void getStationContacts_secondary(int stationVal,station* stations[],int Day, pe
 
     while( k<totalPeople) // For all the people we need to check whether they are Secondary People
     {
-        for (int i=Day, j=0;j<X|| i>=persons[k]->statusChangeDay, i--,j++) // We need to keep track of all the people the Primary Contact was in contact with from the day he bacame a primary contact to the Present Day.
+        for (int i=Day, j=0;j<X|| i>=persons[k]->statusChangeDay; i--,j++) // We need to keep track of all the people the Primary Contact was in contact with from the day he bacame a primary contact to the Present Day.
         {
 
-            if (station[stationVal]->Arraytotal[k]==1)  // if the station is visited by the primary contact.
+            if (stations[stationVal]->Arraytotal[k]==1)  // if the station is visited by the primary contact.
             {
                 if (persons[k]->status!= POSITIVE && persons[k]->status!=PRIMARY_CONTACT && persons[k]->status!=QUARANTINED && persons[k]->status!=SECONDARY_CONTACT) 
                 {
