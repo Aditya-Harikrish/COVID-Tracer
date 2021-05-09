@@ -1,69 +1,126 @@
 #include "list.h"
 
-void updatePeople(person* persons[],int day,LL station_Number,int personNumber)//This has array of persons with each having vectors
+void updatePeople(person *persons[], int day, LL station_Number,int personNumber)//This has array of persons with each having vectors and has time complexity O(1) if size<capacity else if is size = capacity then it is O(size)
 {
-        pushback(&(persons[personNumber]->stations_visited[day%15]),personNumber);//this adds the station to the visited vector on that day
+    pushback(&(persons[personNumber]->stations_visited[day % 15]),station_Number);//this adds the station to the visited vector on that day
 }
+//The purpose of updatePeople is that it updates the stations that person visited on that day.
+//It pushes the station the person is going to visit into the vector
 
 
-void getPrimaryContacts(int Day,person* persons[],station* stations[],LL positive[],int positiveVal,int totalPeople)//positiveVal is the total number of positive people
+
+void updateStations(int Day, station *stations, int stationVisit, int stationLeft, int personNumber) //time complexity of this is O(1)
 {
+    stations[stationVisit].array_people[personNumber] = 1;
+    stations[stationLeft].array_people[personNumber] = 0;
+    stations[stationVisit].Arraytotal[personNumber] = 1;
+    //updateStations(day, &s, path->arr[i + 1], path->arr[i], id);
+}
+//The purpose of UpdateStations is that it updates the stations array_people and Arraytotal
+//array_people will tell the presence of the person in the visiting station and his absence in the left station
+//Arraytotal will keep a check whether that person entered that station or not in that particular day
 
-    for(int i=0;i<positiveVal;i++)//this loop is for iterating through all the positive people
+
+//Here in getPrimaryContacts we go under the assumption that if a positive person enters the station, that station is effected and will make all the people who enter it primary contact.
+
+//This assumption was first not considered and then we tried to keep a track of time but there were 20+ cases we had to take care of and due to time constraints it was not possible
+//to code that up.
+
+
+
+vector
+getPrimaryContacts(int Day, person *persons[], station *stations[], LL positive[], int positiveVal, int totalPeople,int X)//positiveVal is the total number of positive people, the time complexity is O(X*stationsVisited by the person)
+{
+    vector *v;
+    init_vector(v);
+    for (int i = 0; i < positiveVal; i++)//this loop is for iterating through all the positive people
     {
-        for(int j=0;j<15;j++)//this is for keeping a track of all the past 15 days
+        for (int j = 0, l = Day; j < X || l == 0; j++, l--)//this is for keeping a track of all the past 15 days
         {
-            for(int k = 0; k < persons[positiveVal]->stations_visited[j].size; k++) //this gives the stations which the person visited
+            for (int k = 0; k < persons[positiveVal]->stations_visited[l % 15].size; k++) //this gives the stations which the person visited
             {
-               int stationNum = persons[positive[k]]->stations_visited[j].arr[k]; //this gives the station numbers( type int )
-               getStationContacts_primary(stationNum,stations,Day,persons,totalPeople,positive[k]);
+                int stationNum = persons[positive[k]]->stations_visited[l % 15].arr[k]; //this gives the station numbers( type int )
+                *v = getStationContacts_primary(stationNum, stations, Day, persons, totalPeople, positive[k],X);//the person surely visited that station
+
             }
         }
     }
-}
+    return *v;
+} // The average time complexity of this function is O(
+//This takes the input from the user as and calls the function getStationContacts_primary
+//The purpose of this function is that it takes a list of stations, people, positive people, present day and the days till the user want the primary contacts and the total number of primary contacts
+//The function first iterates through all the positive people and for each positive person, it gives the stations visited.
+//Now we use this station visited to call other function named getStationContacts_primary which returns the vector of all the primary contacts
 
 
-void updateStations(int Day,station* stations[],int stationVisit,int stationLeft,int personNumber)
+vector getStationContacts_primary(int stationVal, station *stations[], int Day, person *persons[], int totalPeople,LL positivePerson, int X)//this day is the present day running
 {
-    stations[stationVisit]->array_people[personNumber]=1;//this is a int array which is 1 if the person is present and 0 if that person is not there in that station
-    stations[stationLeft]->array_people[personNumber]=0;
-    stations[stationVisit]->transitNum++;//this is useful for keeping a track of time for which the person visited the station and the person left the station.
-    pushback(stations[stationVisit]->array_time_personVisit[personNumber],stations[stationVisit]->transitNum);//=stations[stationVisit]->transitNum;//the above line is implemented here
-    stations[stationLeft]->transitNum++;//at the end of each day transit num of each station should become 0
-    pushback(stations[stationLeft]->array_time_personLeft[personNumber],stations[stationLeft]->transitNum);
-}
-
-void getStationContacts_primary(int stationVal,station* stations[],int Day,person* persons[],int totalPeople,LL positivePerson)//this day is the present day running
-{
-    for(int i=Day,j=0;j<15;i--,j++)
-    {
-        printf("Primary contacts on Day %d:\n",i);
-        for(int k=0;k<totalPeople;k++)
+    vector *v;
+    init_vector(v);
+    for (int i = Day, j = 0; j < X || i == 0; i--, j++) {
+        printf("Primary contacts on day: %d\n", i);
+        for (int k = 0;k<totalPeople;
+        k++)
         {
-            if(stations[stationVal]->array_People[k]==1)//checking if that person is there in that station.
-            {
-                if(persons[k]->status!=POSITIVE)
-                {
-//                    if(stations[stationVal]->array_time_personVisit[k]<stations[stationVal]->array_time_personLeft[positivePerson])
-//                    {
-//                        printf("%d ",k);
-//                        persons[k]->status=PRIMARY_CONTACT;
-//                    }
+            if (stations[stationVal]->Arraytotal[k] == 1) {
+                if (persons[k]->status != PRIMARY_CONTACT || persons[k]->status != POSITIVE ||
+                    persons[k]->status != QUARANTINED) {
+                    printf("%d ", k);
+                    persons[k]->status = PRIMARY_CONTACT;
+                    persons[k]->statusChangeDay = Day;
+                    pushback(v, k);
                 }
             }
-            printf("/n");
         }
-
-        printf("\n");
     }
+    printf("\n");
+    return *v;
 }
+//This function getStationsContact_primary gives us the primary contacts.
+//Since it is called for a station of a positive person, it checks for all the people present in that day on that station
+//If that person is not primary or positive person or a quarantined person, he is considered a primary contact and his value is pushed into
+// the vector of primary contacts
 
-void getSecondaryContacts(int Day,person* persons[],station* stations[],LL positive[],LL primary[])
+
+vector getPrimaryContacts_print(int Day,person* persons[],station* stations[],LL positive[],int positiveVal,int totalPeople,int X)
 {
-    ;
-}
+    vector *v;
+    init_vector(v);
+    for (int i = 0; i < positiveVal; i++)//this loop is for iterating through all the positive people
+    {
+        for (int j = 0, l = Day; j < X || l == 0; j++, l--)//this is for keeping a track of all the past 15 days
+        {
+            for (int k = 0; k < persons[positiveVal]->stations_visited[l%15].size; k++) //this gives the stations which the person visited
+            {
+                int stationNum = persons[positive[k]]->stations_visited[l%15].arr[k]; //this gives the station numbers( type int )
+                *v = getStationContacts_primary_print(stationNum, stations, Day, persons, totalPeople, positive[k],X);//the person surely visited that station
 
-void getStationContacts_secondary(int stationVal,station* stations[],int Day,person* persons[])
+            }
+        }
+    }
+    return *v;
+}
+//This is the same function as getPrimaryContacts but is needed for the printing purpose
+
+vector getStationContacts_primary_print(int stationVal,station* stations[],int Day,person* persons[],int totalPeople,LL positivePerson,int X)
 {
-
+    vector *v;
+    init_vector(v);
+    for (int i = Day, j = 0; j < X || i == 0; i--, j++) {
+        int num=0;
+        printf("Primary contacts on day: %d\n", i);
+        for (int k = 0;k<totalPeople;k++)
+        {
+            if (stations[stationVal]->Arraytotal[k] == 1) {
+                if (persons[k]->status != PRIMARY_CONTACT ||
+                    persons[k]->status != POSITIVE ||
+                    persons[k]->status != QUARANTINED) {
+                    num++;
+                }
+            }
+        }
+        pushback(v, num);
+    }
+    return *v;
 }
+//This is same as the getStationContacts_primary but is needed for the printing purpose
