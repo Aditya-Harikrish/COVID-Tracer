@@ -28,8 +28,7 @@ void updateStations(int Day, station *stations[], int stationVisit, int stationL
 
 
 vector
-getPrimaryContacts(int Day, person *persons[], station *stations[], LL positive[], int positiveVal, int totalPeople,
-                   int X)//positiveVal is the total number of positive people, the time complexity is O(X*stationsVisited by the person)
+getPrimaryContacts(int Day, person *persons[], station *stations[], LL positive[], int positiveVal, int totalPeople,int X)//positiveVal is the total number of positive people, the time complexity is O(X*stationsVisited by the person)
 {
     vector *v;
     init_vector(v);
@@ -40,8 +39,7 @@ getPrimaryContacts(int Day, person *persons[], station *stations[], LL positive[
             for (int k = 0; k < persons[positiveVal]->stations_visited[l % 15].size; k++) //this gives the stations which the person visited
             {
                 int stationNum = persons[positive[k]]->stations_visited[l % 15].arr[k]; //this gives the station numbers( type int )
-                v = getStationContacts_primary(stationNum, stations, Day, persons, totalPeople, positive[k],
-                                               X);//the person surely visited that station
+                *v = getStationContacts_primary(stationNum, stations, Day, persons, totalPeople, positive[k],X);//the person surely visited that station
 
             }
         }
@@ -54,17 +52,16 @@ getPrimaryContacts(int Day, person *persons[], station *stations[], LL positive[
 //Now we use this station visited to call other function named getStationContacts_primary which returns the vector of all the primary contacts
 
 
-vector getStationContacts_primary(int stationVal, station *stations[], int Day, person *persons[], int totalPeople,
-                                  LL positivePerson, int X)//this day is the present day running
+vector getStationContacts_primary(int stationVal, station *stations[], int Day, person *persons[], int totalPeople,LL positivePerson, int X)//this day is the present day running
 {
     vector *v;
     init_vector(v);
     for (int i = Day, j = 0; j < X || i == 0; i--, j++) {
         printf("Primary contacts on day: %d\n", i);
-        for (int k = 0;<totalPeople;
+        for (int k = 0;k<totalPeople;
         k++)
         {
-            if (station[stationVal]->Arraytotal[k] == 1) {
+            if (stations[stationVal]->Arraytotal[k] == 1) {
                 if (persons[k]->status != PRIMARY_CONTACT || persons[k]->status != POSITIVE ||
                     persons[k]->status != QUARANTINED) {
                     printf("%d ", k);
@@ -95,7 +92,7 @@ vector getPrimaryContacts_print(int Day,person* persons[],station* stations[],LL
             for (int k = 0; k < persons[positiveVal]->stations_visited[l%15].size; k++) //this gives the stations which the person visited
             {
                 int stationNum = persons[positive[k]]->stations_visited[l%15].arr[k]; //this gives the station numbers( type int )
-                v = getStationContacts_primary_print(stationNum, stations, Day, persons, totalPeople, positive[k],X);//the person surely visited that station
+                *v = getStationContacts_primary_print(stationNum, stations, Day, persons, totalPeople, positive[k],X);//the person surely visited that station
 
             }
         }
@@ -104,16 +101,16 @@ vector getPrimaryContacts_print(int Day,person* persons[],station* stations[],LL
 }
 //This is the same function as getPrimaryContacts but is needed for the printing purpose
 
-vector getStationContacts_primary_print(int stationVal,station* stations[],int Day,person* persons[],int totalPeople,LL positivePerson)
+vector getStationContacts_primary_print(int stationVal,station* stations[],int Day,person* persons[],int totalPeople,LL positivePerson,int X)
 {
     vector *v;
     init_vector(v);
     for (int i = Day, j = 0; j < X || i == 0; i--, j++) {
         int num=0;
         printf("Primary contacts on day: %d\n", i);
-        for (int k = 0;<totalPeople;k++)
+        for (int k = 0;k<totalPeople;k++)
         {
-            if (station[stationVal]->Arraytotal[k] == 1) {
+            if (stations[stationVal]->Arraytotal[k] == 1) {
                 if (persons[k]->status != PRIMARY_CONTACT ||
                     persons[k]->status != POSITIVE ||
                     persons[k]->status != QUARANTINED) {

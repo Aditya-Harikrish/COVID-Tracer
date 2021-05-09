@@ -7,6 +7,7 @@
 #include "list.h"
 #include "list1.h"
 #include "person_queries.h"
+#include "vector.h"
 
 #define clearScreen printf("\e[1;1H\e[2J")
 

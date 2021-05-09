@@ -1,8 +1,14 @@
 #ifndef DSA_MINI_PROJECT_LIST_H
 #define DSA_MINI_PROJECT_LIST_H
-#include "vector.h"
+#include "header.h"
 #include "person.h"
 #include "station.h"
+#include "common.h"
+#include "dijkstra.h"
+#include "list1.h"
+#include "person_queries.h"
+#include "vector.h"
+
 
 //The assumption taken here is that if a positive person enters the station in the any point of the day the station, the station is considered effected.
 
@@ -27,10 +33,10 @@ void updateStations(int Day,station* stations[],int stationVisit,int stationLeft
 //array_people will tell the presence of the person in the visiting station and his absence in the left station
 //Arraytotal will keep a check whether that person entered that station or not in that particular day
 
-vector getStationContacts_primary(int stationVal,station* stations[],int Day,person* persons[],int totalPeople,LL positivePerson);
+vector getStationContacts_primary(int stationVal, station *stations[], int Day, person *persons[], int totalPeople,LL positivePerson, int X);
 //This is the same function as getPrimaryContacts but is needed for the printing purpose
 
-vector getStationContacts_primary_print(int stationVal,station* stations[],int Day,person* persons[],int totalPeople,LL positivePerson);
+vector getStationContacts_primary_print(int stationVal,station* stations[],int Day,person* persons[],int totalPeople,LL positivePerson,int X);
 //This is same as the getStationContacts_primary but is needed for the printing purpose
 
 #endif
