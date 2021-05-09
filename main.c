@@ -13,6 +13,7 @@
 
 int main()
 {
+    printf("WELCOME!\n\n");
     /* INPUT */
     int N, M, K;
     scanf("%d %d %d", &N, &M, &K);
@@ -48,7 +49,7 @@ int main()
     for (int i = 0; i < M; ++i) {
         int U, V;
         double W;
-        scanf("%d%d%lf", &U, &V, &W);
+        scanf("%d %d %lf", &U, &V, &W);
         if (U < 0 || U >= N) {
             printf("U is out of bounds\n");
             printf("Assert failed for i = %d\n", i);
@@ -97,7 +98,7 @@ int main()
     /* QUERIES */
     while (1) {
         int choice;
-        printf("WELCOME!\n\n");
+        
         printf("Enter 1 to enter a list of COVID positive people.\n");
         printf("Enter 2 to find the top 3 shortest and safest paths.\n");
         printf("Enter 3 to inquire about a person.\n");
@@ -106,6 +107,7 @@ int main()
         printf("Your choice: ");
         scanf("%d", &choice);
 
+        clearScreen;
 
         /* Here choice 1 is the function for getting primary and secondary contacts.
         For more info on how each of the function works:
@@ -132,7 +134,7 @@ int main()
             scanf("%d", &X);
 
             primaryContacts_vector_print = getPrimaryContacts(day, &p, &s, A, positiveVal, K, X);
-            printf("ehrbhrtbhvbrth\n");
+            
             secondaryContacts_vector_print = getSecondaryContacts_print(day, &p, &s, primaryContacts_vector, X, K);
 
             primaryContacts_vector = getPrimaryContacts(day, &p, &s, A, positiveVal, K, X);
