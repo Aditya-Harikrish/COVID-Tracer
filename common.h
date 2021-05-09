@@ -3,6 +3,6 @@
 #ifndef COMMON_H
 #define COMMON_H
 
-void move_forward_one_day(person* p, station* s, int *day);
+void move_forward_one_day(person* p, station* s, int *day,int totalPeople,int totalStations);
 
 #endif
