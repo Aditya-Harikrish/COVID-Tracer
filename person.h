@@ -17,9 +17,14 @@ struct person {
     int statusChangeDay;
     int changeVal;
 };
-void init_person(person* p);
+void init_person(person* p); 
+// O(1)
+
 void add_travel(person* p, station* s, int day, int destination,int i);
+// Same TC as pushback
+
 int getStatus(person* p);
+// O(1)
 
 
 #endif

@@ -20,6 +20,7 @@ struct station {
 
 
 void init_station(station* station_object, int id, int K);
+//O(1)
 
 
 
