@@ -1,25 +1,29 @@
 # DSA Mini Project - COVID Tracing
 
 ## Instructions to Compile
- 1.  Command: `make init`    or   `make`  
-         This command compiles all subfunctions and make their object file and  the final executable named CovidTracing
+1.  If on Linux: `make init` or `make`  
+         This command compiles all the C files, makes their object files, links them and the final executable named CovidTracing.
+2. If on Windows:
+   ```
+   gcc -g main.c common.c list.c person_queries.c person.c station.c vector.c dijkstra.c list1.c -o CovidTracing
+   ``` 
 <!-- 2.  Command:    make common.o
          This command compiles common.c and builds its object file common.o
- 3.  Command:    make dijkstra.o
+ 1.  Command:    make dijkstra.o
          This command compiles dijkstra.c and builds its object file dijkstra.o
- 4.  Command:    make list.o
+ 2.  Command:    make list.o
          This command compiles list.c and builds its object file list.o
- 5.  Command:    make list1.o
+ 3.  Command:    make list1.o
          This command compiles list1.c and builds its object file list1.o
- 6.  Command:    make person_queries.o
+ 4.  Command:    make person_queries.o
          This command compiles person_queries.c and builds its object file person_queries.o
- 7.  Command:    make person.o
+ 5.  Command:    make person.o
          This command compiles person.c and builds its object file person.o
- 8.  Command:    make station.o
+ 6.  Command:    make station.o
          This command compiles station.c and builds its object file station.o
- 9.  Command:    make vector.o
+ 7.  Command:    make vector.o
          This command compiles vector.c and builds its object file vector.o -->
- 2. Command:    `make clean`  
+ 3. Command:    `make clean`  
          This command removes all the object files and the final executable file.
 
 ## Assumptions:
