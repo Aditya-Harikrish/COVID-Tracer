@@ -82,8 +82,10 @@ int main()
         assert(0);
     }
     for (int i = 0; i < K; ++i)
+    {
         init_person(&p[i]);
-
+        p[i].id=i;
+    }
     for (int i = 0; i < N; ++i)
         init_station(&s[i], i, K);
 
@@ -195,7 +197,7 @@ int main()
             if(path != NULL)
             {
                 for (int i = 0; i < (path->size) - 1; i++) {
-                    updatePeople(&p, day, path->arr[i + 1], id);
+                    updatePeople(p, day, path->arr[i + 1], id);
                     printf("Test-4\n");
                     updateStations(day, s, path->arr[i + 1], path->arr[i], id);
                     printf("Test-5\n");

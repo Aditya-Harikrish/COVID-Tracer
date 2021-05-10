@@ -1,8 +1,19 @@
 #include "common.h"
+#include "person_queries.h"
 void move_forward_one_day(person* p, station* s, int* day, int totalPeople, int totalStations)
 {
+    int d=*day;
     ++(*day);
-    delete_vector(&(p->stations_visited[*day % 15]));
+    //delete_vector(&(p->stations_visited[*day % 15]));
+    for(int i=0;i<totalPeople;i++)
+    {
+        vector v=p[i].stations_visited[*day % 15];
+        vector v1=p[i].stations_visited[d%15];
+        int l=location(p[i],d,'R');
+        while(v.size!=0)
+            popback(&v);
+        pushback(&p[i].stations_visited[*day % 15],l);
+    }
     for (int i = 0;i < totalStations;i++) {
         for (int j = 0;j < totalPeople;j++) {
             s[i].Arraytotal[j] = s[i].array_people[j];

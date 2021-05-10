@@ -12,7 +12,7 @@
 
 //The assumption taken here is that if a positive person enters the station in the any point of the day the station, the station is considered effected.
 
-void updatePeople(person* persons[],int day,LL station_Number,int personNumber);
+void updatePeople(person* persons,int day,LL station_Number,int personNumber);
 //The purpose of updatePeople is that it updates the stations that person visited on that day.
 //It pushes the station the person is going to visit into the vector
 

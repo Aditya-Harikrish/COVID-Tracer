@@ -64,13 +64,14 @@ void popback(vector* v)
         printf("Underflow error! Cannot popback from an empty vector!\n");
         assert(0);
     }
-    --(v->size);
+    
     if (v->size == 0) {
         free(v->arr);
         v->arr = NULL;
         v->capacity = 0;
         return;
     }
+    --(v->size);
     if (v->size * 2 <= v->capacity) {
         v->capacity = v->size;
         v->arr = (int*)realloc(v->arr, v->size * sizeof(int));
