@@ -38,7 +38,7 @@ int list_positive(person* p, int k, char func)
         }
         for (int i = 0; i < v.size; i++)
         {
-            printf("%d", v.arr[i]);
+            printf("%d ", v.arr[i]);
         }
         printf("\n");
         printf("Do you wish to print the list of quarintined person(y/n):\n");
@@ -52,7 +52,7 @@ int list_positive(person* p, int k, char func)
             }
             for (int i = 0; i < v1.size; i++)
             {
-                printf("%d", v1.arr[i]);
+                printf("%d ", v1.arr[i]);
             }
         }
     }
@@ -82,7 +82,7 @@ int list_primary(person* p, int k, char func)
         }
         for (int i = 0; i < v.size; i++)
         {
-            printf("%d", v.arr[i]);
+            printf("%d ", v.arr[i]);
         }
         printf("\n");
     }
@@ -112,7 +112,7 @@ int list_secondary(person* p, int k, char func)
         }
         for (int i = 0; i < v.size; i++)
         {
-            printf("%d", v.arr[i]);
+            printf("%d ", v.arr[i]);
         }
         printf("\n");
     }
@@ -143,7 +143,7 @@ int list_primary_at_s(station s, person* p, int k, char func)
         }
         for (int i = 0; i < v.size; i++)
         {
-            printf("%d", v.arr[i]);
+            printf("%d ", v.arr[i]);
         }
         printf("\n");
     }
@@ -174,7 +174,7 @@ int list_secondary_at_s(station s, person* p, int k, char func)
         }
         for (int i = 0; i < v.size; i++)
         {
-            printf("%d", v.arr[i]);
+            printf("%d ", v.arr[i]);
         }
         printf("\n");
     }
@@ -212,7 +212,7 @@ int list_positive_at_s(station s, person* p, int k, char func)
         }
         for (int i = 0; i < v.size; i++)
         {
-            printf("/%d", v.arr[i]);
+            printf("%d ", v.arr[i]);
         }
         printf("\n");
         printf("Do you wish to print the list of quarintined person(y/n):\n");
@@ -226,7 +226,7 @@ int list_positive_at_s(station s, person* p, int k, char func)
             }
             for (int i = 0; i < v1.size; i++)
             {
-                printf("%d", v1.arr[i]);
+                printf("%d ", v1.arr[i]);
             }
         }
     }
@@ -251,6 +251,6 @@ double danger_value(station s, person* p, int K)
     int prim = list_primary_at_s(s, p, K, 'R');
     int sec = list_secondary_at_s(s, p, K, 'R');
     double x = pos + prim / 5 + sec / 10;
-    printf("Danger_val = %lf\n", x);
+    //printf("Danger_val = %lf\n", x);
     return x;
 }
