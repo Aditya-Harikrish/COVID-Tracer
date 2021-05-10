@@ -7,6 +7,8 @@
 int num_stations;
 int src;
 int dest;
+
+// keeps the src whose edge has to be removed for the third path
 int edge_to_rem_in_third;
 
 vector* get_safest_shortest(int s, int d, int num_st, int** adj_matrix, station arr[])
@@ -35,17 +37,20 @@ vector* get_safest_shortest(int s, int d, int num_st, int** adj_matrix, station 
         // returns 1 if the 2nd pointer corresponds to shorter path
         if(give_shortest_path(path_2, path_3, adj_matrix) == 1)
         {
+            //swapping the pointers to the paths
             vector* tmp = path_2;
             path_2= path_3;
             path_3 = tmp;
         }
     }
     
+    // getting the shortest paths if 2 paths have the same danger value
     if(danger_1 == danger_2)
     {
         // returns 1 if the 2nd pointer corresponds to shorter path
         if(give_shortest_path(path_1, path_2, adj_matrix) == 1)
         {
+            //swapping the pointers to the paths
             vector* tmp = path_1;
             path_1= path_2;
             path_2 = tmp;
@@ -64,6 +69,8 @@ vector* get_safest_shortest(int s, int d, int num_st, int** adj_matrix, station 
 
     char ch;
     int path_num;
+
+    // asking the user if they want to traverse the path
     printf("Do you want to traverse? (y/n): ");
     scanf(" %c", &ch);
 
@@ -115,6 +122,9 @@ int give_shortest_path(vector* S, vector* T, int** matrix)
 
     // 'r' acts as the source and 's' as the destination
     int r,s;
+
+    //calculating the path length of path S
+    //the distance will be given from the graph
     for(int i = 0 ; i < S->size - 1; i++)
     {
         r = S->arr[i];
@@ -122,6 +132,8 @@ int give_shortest_path(vector* S, vector* T, int** matrix)
         total_dist_1 += matrix[r][s];
     }
 
+    // calculating the path length of T
+    //the distance will be given from the graph
     for(int i = 0 ; i < T->size - 1; i++)
     {
         r = T->arr[i];
@@ -129,17 +141,20 @@ int give_shortest_path(vector* S, vector* T, int** matrix)
         total_dist_2 += matrix[r][s];
     }
 
+    // if path T turns out to be shorter, we return 1 to swap the paths
     if(total_dist_2 < total_dist_1)
     {
         return 1;
     }
 
+    //else we return 0
     return 0;
 }
 
 // getting the safest path among all
 double first_safest(int** matrix, vector* P1, station arr[])
 {
+    // for Yen's algorithm, the first path is given by simply dijkstra
     double danger_1 =  dijkstra_safety(matrix, arr, P1);
     return danger_1;
 }
@@ -151,8 +166,10 @@ int safest_station(double danger_path[], bool traversed[], int dist[])
     int station_with_min_danger;
     int min_dist = INT_MAX;
 
+    // traversing over the all stations to check them
     for(int i = 0; i < num_stations; i++)
     {
+        // we need the next safest station which is not traversed, has the least danger value and is the shortest
         if(traversed[i] == false && danger_path[i] <= min && dist[i] < min_dist)
         {
             min_dist = dist[i];
@@ -161,17 +178,26 @@ int safest_station(double danger_path[], bool traversed[], int dist[])
         }
     }
 
+    //returns the index of station with minimum danger value
     return station_with_min_danger;
 }
 
 // dijkstra implementation using the danger value as the cost
 double dijkstra_safety(int** graph, station arr[], vector* P)
 {
+    // to take account of the danger val of each station
     double danger_val_path[num_stations];
+
+    // checks if a station has been included in the shortest tree, that is if it has been traversed or not
     bool traversed[num_stations];
+
+    // keeps the parent of each station corresponding to its smallest path
     int parent[num_stations];
+
+    // keeps the total distance to reach that station
     int dist[num_stations];
 
+    // initially all stations have infinite distance and are not traversed
     for(int i = 0; i < num_stations; i++)
     {
         danger_val_path[i] = INT_MAX;
@@ -180,18 +206,25 @@ double dijkstra_safety(int** graph, station arr[], vector* P)
         dist[i] = INT_MAX;
     }
 
+    // the src is given 0, to select it as the smallest during first iteration of safest station
     danger_val_path[src] = 0;
     dist[src] = 0;
 
     for(int i = 0; i < num_stations - 1; i++)
     {
+        // gives the safest station which hasnt been traversed yet
         int u = safest_station(danger_val_path, traversed, dist);
+
+        // the safest station is now included in the shortest path tree
         traversed[u] = true;
 
         if(danger_val_path[u] != INT_MAX)
         {
+            // traversing all the vertices 'u' is connected to and updting the danger values and path distances
             for(int j = 0; j < num_stations; j++)
             {
+                // the distance, danger_val, parent are updated only if the vertex is not yet traversed and has
+                // danger value of new path less than its current danger value
                 if(traversed[j] == false && graph[u][j] > 0 && danger_val_path[u] + arr[j].dangerValue < danger_val_path[j])
                 {
                     parent[j] = u;
@@ -205,12 +238,14 @@ double dijkstra_safety(int** graph, station arr[], vector* P)
     // getting the path using the parent array
     get_path(parent, P, dest);
 
+    // returning the danger value corresponding to the destination
     return danger_val_path[dest];
 }
 
-// gets the path using parent array
+// recursive function which gets the path using parent array
 void get_path(int parent[], vector* P, int tmp_src)
 {
+    // we have reached the src if its parent it -1
     if(parent[tmp_src] == -1)
     {
         pushback(P, tmp_src);
@@ -229,15 +264,22 @@ double second_safest(int** matrix, vector* P1, vector* P2, station arr[])
     // keeps track of the danger value of each path
     double total_danger_val[P1->size -1];
 
+    // keeps distance of all paths
     int dist_all_paths[P1->size-1];
 
+    // to iterate over all edges and removing them one by one
     for(int i = 0; i < P1->size - 1; i++)
     {
+        // gives the start of edge
         int r = P1->arr[i];
+
+        // gives the end of that edge
         int s = P1->arr[i+1];
 
+        // initialising to 0, to remove any garbage value
         dist_all_paths[i] = 0;
 
+        // initialising the vector which keeps this new path
         all_paths[i] = init_vector_ptr();
 
         // removing the edge from the matrix
@@ -250,8 +292,10 @@ double second_safest(int** matrix, vector* P1, vector* P2, station arr[])
         // restoring the value of the cost in that cell
         matrix[r][s] = tmp;
 
+        // value updated in the array
         total_danger_val[i] = danger_of_dest; 
 
+        //updating the total distance in the array
         for(int j = 0; j < all_paths[i]->size - 1; j++)
         {
             dist_all_paths[i] += matrix[all_paths[i]->arr[j]][all_paths[i]->arr[j+1]];
@@ -289,6 +333,7 @@ double second_safest(int** matrix, vector* P1, vector* P2, station arr[])
         delete_vector_ptr(&all_paths[i]);
     }
 
+    //returning the minimum danger value
     return min;
 }
 
@@ -307,13 +352,19 @@ double third_safest(int** matrix, vector* P1, vector* P2, vector* P3, station ar
     int t = matrix[P1->arr[edge_to_rem_in_third]][P1->arr[edge_to_rem_in_third+1]];
     matrix[P1->arr[edge_to_rem_in_third]][P1->arr[edge_to_rem_in_third+1]] = 0;
 
+    // to iterate over all edges and removing them one by one
     for(int i = 0; i < P2->size - 1; i++)
     {
+        // gives the start of edge
         int r = P2->arr[i];
+
+        // gives the end of that edge
         int s = P2->arr[i+1];
 
+        // initialising to 0, to remove any garbage value
         dist_all_paths[i] = 0;
 
+        // initialising the vector which keeps this new path
         all_paths[i] = init_vector_ptr();
 
         // removing the edge from the matrix
@@ -332,8 +383,10 @@ double third_safest(int** matrix, vector* P1, vector* P2, vector* P3, station ar
         // restoring the value of deleted edge
         matrix[r][s] = tmp;
 
+        // value updated in the array
         total_danger_val[i] = danger_of_dest;
 
+        //updating the total distance in the array
         for(int j = 0; j < all_paths[i]->size - 1; j++)
         {
             dist_all_paths[i] += matrix[all_paths[i]->arr[j]][all_paths[i]->arr[j+1]];
@@ -422,6 +475,7 @@ int comp(vector* P1, vector* P3)
     {
         for(int i = 0; i < P1->size; i++)
         {
+            // we return 0 as the stations at this fail to be identical
             if(P1->arr[i] != P3->arr[i])
             {
                 return 0;
