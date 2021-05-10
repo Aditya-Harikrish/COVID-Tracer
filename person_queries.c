@@ -13,14 +13,20 @@ void status(person p)
 
 int list_positive(person* p, int k, char func)
 {
-    vector v;
+    vector v,v1;
+    char ch;
     init_vector(&v);
-    int s = 0;
+    init_vector(&v1);
+    int s = 0,s1=0;
 
     for (int i = 0; i < k; i++) {
         if (p[i].status == 1) {
             pushback(&v, p[i].id);
             s++;
+        }
+        if(p[i].status==4){
+            s1++;
+            pushback(&v1,p[i].id);
         }
     }
     if (func == 'P')
@@ -35,6 +41,20 @@ int list_positive(person* p, int k, char func)
             printf("%d", v.arr[i]);
         }
         printf("\n");
+        printf("Do you wish to print the list of quarintined person(y/n):\n");
+        scanf("%c",&ch);
+        if(ch=='y' || ch== 'Y')
+        {
+            if(v1.size == 0)
+            {
+                printf("There are no quarintined persons\n");
+                return 0;
+            }
+            for (int i = 0; i < v1.size; i++)
+            {
+                printf("%d", v1.arr[i]);
+            }
+        }
     }
 
     if (func == 'R')
@@ -165,14 +185,22 @@ int list_secondary_at_s(station s, person* p, int k, char func)
 
 int list_positive_at_s(station s, person* p, int k, char func)
 {
-    vector v;
+    char ch;
+    vector v,v1;
     init_vector(&v);
-    int sum = 0;
+    init_vector(&v1);
+    int sum = 0,s1=0;
 
     for (int i = 0; i < k; i++) {
         if (s.array_people[i] == 1 && p[i].status == 1) {
             pushback(&v, p[i].id);
             sum++;
+        }
+    }
+    for (int i = 0; i < k; i++) {
+        if (s.array_people[i] == 1 && p[i].status == 4) {
+            pushback(&v1, p[i].id);
+            s1++;
         }
     }
     if (func == 'P')
@@ -187,6 +215,20 @@ int list_positive_at_s(station s, person* p, int k, char func)
             printf("/%d", v.arr[i]);
         }
         printf("\n");
+        printf("Do you wish to print the list of quarintined person(y/n):\n");
+        scanf("%c",&ch);
+        if(ch=='y' || ch== 'Y')
+        {
+            if(v1.size == 0)
+            {
+                printf("There are no quarintined persons\n");
+                return 0;
+            }
+            for (int i = 0; i < v1.size; i++)
+            {
+                printf("%d", v1.arr[i]);
+            }
+        }
     }
 
     if (func == 'R')
