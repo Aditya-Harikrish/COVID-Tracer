@@ -250,7 +250,7 @@ double danger_value(station s, person* p, int K)
     int pos = list_positive_at_s(s, p, K, 'R');
     int prim = list_primary_at_s(s, p, K, 'R');
     int sec = list_secondary_at_s(s, p, K, 'R');
-    double x = pos + prim / 5 + sec / 10;
+    double x = (double)pos + (double)prim / 5 + (double)sec / 10;
     //printf("Danger_val = %lf\n", x);
     return x;
 }

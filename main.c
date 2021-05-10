@@ -307,7 +307,8 @@ int main()
 
                 // Use this if the dangerValue data member is being updated:
                 //printf("Danger value of station %d is %lf.\n", id, s[id].dangerValue);
-                printf("Danger value of station %d is %lf.\n", id, danger_value(s[id],p,K));
+                //printf("Danger value of station %d is %lf.\n", id, danger_value(s[id],p,K));
+                printf("Danger value of station %d is %lf.\n", id, danger_value(s[id], p, K));
                 break;
                 // Else use this:
                 // printf("Danger value of station %d is %Lf.\n", id, danger_value(s[id], p, K));
