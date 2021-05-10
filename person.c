@@ -4,6 +4,7 @@
 void init_person(person* p)
 {
     p->status = NEGATIVE;
+    p->statusChangeDay=0;
     for (int i = 0; i < 15; ++i) {
         init_vector(&(p->stations_visited[i]));
     }

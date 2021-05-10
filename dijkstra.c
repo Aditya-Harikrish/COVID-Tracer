@@ -69,8 +69,11 @@ vector* get_safest_shortest(int s, int d, int num_st, int** adj_matrix, station 
 
     char ch;
     int path_num;
+<<<<<<< HEAD
 
     // asking the user if they want to traverse the path
+=======
+>>>>>>> _jaishnav
     printf("Do you want to traverse? (y/n): ");
     scanf(" %c", &ch);
 

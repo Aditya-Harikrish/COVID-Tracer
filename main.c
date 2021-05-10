@@ -116,61 +116,93 @@ int main()
         (a) go to list.h and list.c for primary contacts
         (b) visit list1.h and list1.c for info about secondary contacts. */
         if (choice == 1) {
+            L1:;
             int positiveVal;
             vector primaryContacts_vector;
             init_vector(&primaryContacts_vector);
-            vector primaryContacts_vector_print;
-            init_vector(&primaryContacts_vector_print);
+//            vector primaryContacts_vector_print;
+//            init_vector(&primaryContacts_vector_print);
 
-            vector secondaryContacts_vector_print;
-            init_vector(&secondaryContacts_vector_print);
+//            vector secondaryContacts_vector_print;
+//            init_vector(&secondaryContacts_vector_print);
 
+            printf("Enter the number of positive people: ");
             scanf("%d", &positiveVal);
-
-            LL A[positiveVal];
-            for (int i = 0; i < positiveVal; i++) {
-                scanf("%lld", &A[i]);
+            if(positiveVal<=0||positiveVal>K)
+            {
+                printf("Enter a valid input\n");
+                goto L1;
+            }
+            printf("Enter the person id: ");
+            LL positive[positiveVal];//Array of id's of positive people
+            bool invalid_input=0;
+            for (int i = 0; i < positiveVal&&!invalid_input; i++) {
+                scanf("%lld", &positive[i]);
+                if(positive[i]<0||positive[i]>=K)
+                {
+                    printf("This person does not exist\n");
+                    invalid_input=1;
+                }
+            }
+            if(invalid_input)
+            {
+                continue;
             }
 
-            int X;
+            int X;//The last X days you want a list of.
+            printf("Enter the number of days you want to trace back to: ");
             scanf("%d", &X);
-
-            primaryContacts_vector_print = getPrimaryContacts(day, &p, &s, A, positiveVal, K, X);
-            
-            secondaryContacts_vector_print = getSecondaryContacts_print(day, &p, &s, primaryContacts_vector, X, K);
-
-            primaryContacts_vector = getPrimaryContacts(day, &p, &s, A, positiveVal, K, X);
-            getSecondaryContacts(day, &p, &s, primaryContacts_vector, X, K);
-
-
-            printf("Do you want to take the output into a file for plotting the number of primary contacts on each day (0/1)  ??\n");
-            int val;
-            scanf("%d", &val);
-            if (val == 1) {
-                for (int i = day, j = 0; j < X || i == 0; i--, j++) {
-                    //printf("%d %d\n",day,primaryContacts_vector_print.arr[j]);
-                    FILE* fptr;
-                    fptr = fopen("primary_contacts.txt", "w");
-                    fprintf(fptr, "%d %d\n", day, primaryContacts_vector_print.arr[j]);
-                    fclose(fptr);
-                }
+            if(X<1||X>15)
+            {
+                printf("Out of bounds error\n");
+                printf("X has to be an integer between 1 and 15\n");
+                continue;
             }
 
-            printf("Do you want to take the output into a file for plotting the number of secondary contacts on each day (0/1)  ??\n");
-
-            scanf("%d", &val);
-            if (val == 1) {
-                for (int i = day, j = 0; j < X || i == 0; i--, j++) {
-                    FILE* fptr;
-                    fptr = fopen("secondary_contacts.txt", "w");
-                    fprintf(fptr, "%d %d\n", day, secondaryContacts_vector_print.arr[j]);
-                    fclose(fptr);
-                }
+            for (int i = 0;i < positiveVal;i++) {
+                p[positive[i]].status = POSITIVE;
             }
+
+//            primaryContacts_vector_print = getPrimaryContacts(day, &p, &s, A, positiveVal, K, X);
+//            secondaryContacts_vector_print = getSecondaryContacts_print(day, &p, &s, primaryContacts_vector, X, K);
+
+            primaryContacts_vector = getPrimaryContacts(day, p, s, positive, positiveVal, K, X);
+            getSecondaryContacts(day, p, s, primaryContacts_vector, X, K);
+
+            for(int i=0;i<N;i++)
+            {
+                s[i].dangerValue= danger_value(s[i],p,K);
+            }
+
+
+//            printf("Do you want to take the output into a file for plotting the number of primary contacts on each day (0/1)  ??\n");
+//            int val;
+//            scanf("%d", &val);
+//            if (val == 1) {
+//                for (int i = day, j = 0; j < X || i == 0; i--, j++) {
+//                    //printf("%d %d\n",day,primaryContacts_vector_print.arr[j]);
+//                    FILE* fptr;
+//                    fptr = fopen("primary_contacts.txt", "w");
+//                    fprintf(fptr, "%d %d\n", day, primaryContacts_vector_print.arr[j]);
+//                    fclose(fptr);
+//                }
+//            }
+//
+//            printf("Do you want to take the output into a file for plotting the number of secondary contacts on each day (0/1)  ??\n");
+//
+//            scanf("%d", &val);
+//            if (val == 1) {
+//                for (int i = day, j = 0; j < X || i == 0; i--, j++) {
+//                    FILE* fptr;
+//                    fptr = fopen("secondary_contacts.txt", "w");
+//                    fprintf(fptr, "%d %d\n", day, secondaryContacts_vector_print.arr[j]);
+//                    fclose(fptr);
+//                }
+//            }
 
 
             for (int i = 0;i < positiveVal;i++) {
-                p[A[i]].status = QUARANTINED;
+                p[positive[i]].status = QUARANTINED;
             }
 
         }
@@ -198,13 +230,11 @@ int main()
             {
                 for (int i = 0; i < (path->size) - 1; i++) {
                     updatePeople(p, day, path->arr[i + 1], id);
-                    printf("Test-4\n");
                     updateStations(day, s, path->arr[i + 1], path->arr[i], id);
-                    printf("Test-5\n");
                 }
-                s[path->arr[0]].dangerValue= danger_value(s[path->arr[0]],p,K);
-                s[path->arr[path->size - 1]].dangerValue=danger_value(s[path->arr[path->size - 1]],p,K);
-                printf("Test-6\n");
+//                s[path->arr[0]].dangerValue= danger_value(s[path->arr[0]],p,K);
+//                s[path->arr[path->size - 1]].dangerValue=danger_value(s[path->arr[path->size - 1]],p,K);
+
             }          
         }
         else if (choice == 3) {
@@ -277,7 +307,7 @@ int main()
 
                 // Use this if the dangerValue data member is being updated:
                 printf("Danger value of station %d is %lf.\n", id, s[id].dangerValue);
-
+                break;
                 // Else use this:
                 // printf("Danger value of station %d is %Lf.\n", id, danger_value(s[id], p, K));
 

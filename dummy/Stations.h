@@ -8,7 +8,7 @@
 #include <string.h>
 #include <math.h>
 #include <assert.h>
-#include "Persons.h"
+#include "person.h"
 
 typedef long long int LL;
 typedef struct station
