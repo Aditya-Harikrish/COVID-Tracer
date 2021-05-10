@@ -10,7 +10,7 @@
 #include "vector.h"
 
 #define clearScreen printf("\e[1;1H\e[2J")
-
+    
 int main()
 {
     printf("WELCOME!\n\n");
