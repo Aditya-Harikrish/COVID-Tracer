@@ -33,7 +33,7 @@ getPrimaryContacts(int Day, person *persons, station *stations, LL positive[], i
 {
     vector v;
     init_vector(&v);
-    printf("Primary contacts on day\n");
+    printf("Primary contacts: \n");
     for (int i = 0; i < positiveVal; i++)//this loop is for iterating through all the positive people
     {
         for (int j = 0, l = Day; j < X && l >= 0; j++, l--)//this is for keeping a track of all the past 15 days
@@ -45,6 +45,7 @@ getPrimaryContacts(int Day, person *persons, station *stations, LL positive[], i
             }
         }
     }
+    printf("\n");
     return v;
 } // The average time complexity of this function is O(
 //This takes the input from the user as and calls the function getStationContacts_primary
@@ -73,7 +74,6 @@ vector getStationContacts_primary(int stationVal, station *stations, int Day, pe
             }
         }
     }
-    printf("\n");
     return v;
 }
 //This function getStationsContact_primary gives us the primary contacts.
