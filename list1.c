@@ -5,6 +5,7 @@
 
 void getSecondaryContacts(int Day,person* persons,station* stations,vector v,int X,int totalPeople)
 {
+    printf("Secondary contacts: ");
     for (int i=0; i< v.size;i++) // To check all the Primary Contacts in the given list.
     {
 
@@ -13,7 +14,7 @@ void getSecondaryContacts(int Day,person* persons,station* stations,vector v,int
             int k=0;
             while(k < persons[v.arr[i]].stations_visited[Daycount%15].size) // Checks all the Stations that a Primary Contact has visited from the day he
             {                                                               //became a Primary contact  to the Present Day
-                int stationNum = persons[v.arr[k]].stations_visited[Daycount%15].arr[k]; // the station that a Primary contact visited on a particular day
+                int stationNum = persons[v.arr[i]].stations_visited[Daycount%15].arr[k]; // the station that a Primary contact visited on a particular day
                 getStationContacts_secondary(stationNum,stations,Day,persons,totalPeople, v.arr[k]);
                 //getStationContacts_secondary computes all the Secondary Contacts in a particular station on a particular day
                 k++;
@@ -22,6 +23,7 @@ void getSecondaryContacts(int Day,person* persons,station* stations,vector v,int
 
         }
     }
+    printf("\n");
 }
 // Now we iterate over all the people and check who have been in contact with the Primary contact on a particular day in a given station.
 void getStationContacts_secondary(int stationVal,station* stations,int Day, person* persons, int totalPeople, int X)
@@ -44,7 +46,6 @@ void getStationContacts_secondary(int stationVal,station* stations,int Day, pers
         }
         k++;
     }
-    printf("\n");
 }
 // We can print the Secondary contacts using two functions getSecondaryContacts_print and getStationContacts_secondary_print
 vector getSecondaryContacts_print(int Day,person* persons[],station* stations[],vector v,int X,int totalPeople)
