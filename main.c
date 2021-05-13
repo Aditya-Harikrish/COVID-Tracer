@@ -246,7 +246,34 @@ int main()
             // s[path->arr[0]].dangerValue= danger_value(s[path->arr[0]],p,K);
             // s[path->arr[path->size - 1]].dangerValue=danger_value(s[path->arr[path->size - 1]],p,K);
 
-            }          
+            }      
+            for (int i = 0; i < (path->size); i++) {
+                    int st =p[id].status;
+                    int curr_station=path->arr[i];
+                    if(st == 1)
+                    {
+                        for(int j=0;j<K;i++)
+                        {
+                            if(s[curr_station].array_people[j]==1)
+                            {
+                                if(p[j].status==0 || p[j].status==3)
+                                    p[j].status=2;
+                            }
+                        }
+                    }
+                    if(st == 2)
+                    {
+                        for(int j=0;j<K;j++)
+                        {
+                            if(s[curr_station].array_people[j]==1)
+                            {
+                                if(p[j].status==0)
+                                    p[j].status=3;
+                            }
+                        }
+                    }
+                    
+                }    
         }
         else if (choice == 3) {
             printf("Enter 1 to access the status of a person.\n");
